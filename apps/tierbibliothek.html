@@ -257,7 +257,7 @@ function renderHome(){
   stopSpeak();
   const list = TIERE.filter(t => state.filter==="alle" || t.raum.includes(state.filter));
   app.innerHTML = `
-    <a class="back" href="../klasse.html">← Pausenplatz</a>
+    <a class="back" href="../zurueck.html">← Zurück</a>
     <header class="intro">
       <h1>Tierbibliothek</h1>
       <p>Wilde Tiere aus unserer Heimat. Wähle ein Tier und werde zum Tier-Profi!</p>
@@ -397,17 +397,16 @@ function renderTier(t){
 }
 
 /* Vorlesen: wählt automatisch die angenehmste deutsche Stimme des Geräts */
-const GOOD=["natural","neural","online","premium","enhanced","verbessert","google deutsch","katja","leni","seraphina","amala","vicki","anna","petra","helena","marlene"];
+const GOOD=["premium","enhanced","verbessert","natural","neural","siri","katja","leni","seraphina","amala","vicki","anna","petra","helena","marlene"];
 const BAD=["compact","espeak","eloquence","grandma","grandpa","flo","rocko","reed","sandy","shelley","eddy"];
 function scoreVoice(v){
   const n=(v.name||"").toLowerCase(); let sc=0;
   if(v.lang==="de-CH")sc+=3; else if((v.lang||"").startsWith("de"))sc+=2; else return -99;
   GOOD.forEach((g,i)=>{if(n.includes(g))sc+= i<6?6:3;});
   BAD.forEach(b=>{if(n.includes(b))sc-=6;});
-  if(!v.localService)sc+=1;
   return sc;
 }
-function germanVoices(){try{return speechSynthesis.getVoices().filter(v=>(v.lang||"").startsWith("de")).sort((a,b)=>scoreVoice(b)-scoreVoice(a));}catch(e){return [];}}
+function germanVoices(){try{return speechSynthesis.getVoices().filter(v=>(v.lang||"").startsWith("de")&&v.localService!==false).sort((a,b)=>scoreVoice(b)-scoreVoice(a));}catch(e){return [];}}
 let chosenVoice=null;
 try{chosenVoice=localStorage.getItem("tb-voice");}catch(e){}
 function setupVoice(getText){
@@ -417,7 +416,7 @@ function setupVoice(getText){
   const fill=()=>{
     const vs=germanVoices();
     sel.innerHTML=vs.map(v=>`<option value="${esc(v.name)}">${esc(v.name.replace(/^Microsoft |^Google /,"").replace(/ - .*$/,""))}</option>`).join("");
-    sel.hidden=vs.length<2; document.querySelector(".vlabel").hidden=vs.length<2;
+    bar.hidden=!vs.length; sel.hidden=vs.length<2; document.querySelector(".vlabel").hidden=vs.length<2;
     if(chosenVoice&&vs.some(v=>v.name===chosenVoice))sel.value=chosenVoice; else if(vs[0])sel.value=vs[0].name;
   };
   fill(); speechSynthesis.onvoiceschanged=fill;
@@ -427,7 +426,7 @@ function setupVoice(getText){
       if(speechSynthesis.speaking){stopSpeak();return;}
       const u=new SpeechSynthesisUtterance(getText());
       const v=germanVoices().find(x=>x.name===sel.value)||germanVoices()[0];
-      if(v){u.voice=v;u.lang=v.lang;}else u.lang="de-DE";
+      if(!v)return; u.voice=v;u.lang=v.lang;
       u.rate=state.level===1?0.82:0.9; u.pitch=1.08;
       u.onend=()=>{rb.textContent="Vorlesen";};
       speechSynthesis.speak(u); rb.textContent="Stopp";

@@ -2032,7 +2032,7 @@ var qrcode = function () {
  };
 }();
 
-/* Lernstand-Code: zeigt den Lernstand als QR-Code für das Lehrerzimmer.
+/* Lernstand-Code: zeigt den Lernstand als QR-Code für «Lernstand einlesen».
    Alles passiert auf dem Gerät. Es wird nichts gespeichert und nichts gesendet.
    Format: «LS1:» + Base45( Version | Art | Daten | CRC32 ), Daten = JSON (mit deflate gepackt, wenn der Browser das kann). */
 (function(){
@@ -2138,7 +2138,7 @@ var qrcode = function () {
       '<p class="lsqr-k">Für die Lehrperson</p><h2 class="lsqr-t" id="lsqr-t">Lernstand-Code</h2>' +
       '<div class="lsqr-kids" role="group" aria-label="Kind wählen" hidden></div>' +
       '<div class="lsqr-code"></div><p class="lsqr-who"></p>' +
-      '<p class="lsqr-h">Im Lehrerzimmer auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
+      '<p class="lsqr-h">Auf eduapps.ch unter «Lernstand einlesen» auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
     document.body.appendChild(root);
     root.querySelector('.lsqr-x').onclick = close;
     root.addEventListener('click', function(e){ if(e.target === root) close(); });
@@ -2228,7 +2228,7 @@ var qrcode = function () {
 <main id="home" class="view">
   <div class="wrap">
     <div class="home-top">
-      <a class="btn small pp-back" href="../klasse.html"><svg class="icon"><use href="#i-back"/></svg>Pausenplatz</a>
+      <a class="btn small pp-back" href="../zurueck.html"><svg class="icon"><use href="#i-back"/></svg>Zurück</a>
       <span class="mark"><i></i>Lesezug</span>
       <span class="spacer"></span>
       <button class="driver" id="driver" hidden></button>
@@ -3963,7 +3963,7 @@ function einstHTML(){
 
   <div class="panel"><h2>Daten und Zugang</h2>
     <p class="hint">Alle Ergebnisse bleiben im Browser dieses Geräts. Nichts wird ins Internet übertragen. Wird der Browserverlauf gelöscht, sind auch die Ergebnisse weg.</p>
-    <p class="hint" style="margin-top:8px">Den Lernstand eines Kindes sehen Sie im Lehrerzimmer: Auf der Startseite «Lernstand-Code» antippen und den Code dort scannen.</p>
+    <p class="hint" style="margin-top:8px">Den Lernstand eines Kindes sehen Sie auf eduapps.ch unter «Lernstand einlesen»: Auf der Startseite «Lernstand-Code» antippen und den Code dort scannen.</p>
     <div class="actions" style="justify-content:flex-start"><button class="btn small" data-pinnew>PIN ändern</button><button class="btn small danger" data-wipe>Alle Lerndaten löschen</button></div>
     ${storageOK ? '' : '<p class="msg">Achtung: Dieser Browser lässt kein Speichern zu (privates Surfen?). Ergebnisse gehen beim Schliessen verloren.</p>'}</div>`;
 }
@@ -4004,7 +4004,7 @@ function bindDesk(){
   });
 }
 
-/* ---------- Lernstand-Code fürs Lehrerzimmer ---------- */
+/* ---------- Lernstand-Code für «Lernstand einlesen» ---------- */
 const lsqrHas = k => !!(DB.kids[k] && DB.kids[k].log && DB.kids[k].log.length);
 LernstandQR.init({
   app:'lesezug', title:'Lesezug',

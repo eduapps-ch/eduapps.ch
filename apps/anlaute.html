@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Anlaute hören</title>
 <!-- Datenschutz: Die App baut keine Verbindungen ins Internet auf und lädt nichts nach.
-     Bilder und Laut-Aufnahmen stecken in dieser Datei. Den Lernstand sieht die Lehrperson nur über den Lernstand-Code im Lehrerzimmer.
+     Bilder und Laut-Aufnahmen stecken in dieser Datei. Den Lernstand sieht die Lehrperson nur über den Lernstand-Code auf eduapps.ch unter «Lernstand einlesen».
      Ergebnisse bleiben im Browser dieses Geräts. Die Wörter liest die Stimme des Geräts vor. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
@@ -1670,7 +1670,7 @@ var qrcode = function () {
  };
 }();
 
-/* Lernstand-Code: zeigt den Lernstand als QR-Code für das Lehrerzimmer.
+/* Lernstand-Code: zeigt den Lernstand als QR-Code für «Lernstand einlesen».
    Alles passiert auf dem Gerät. Es wird nichts gespeichert und nichts gesendet.
    Format: «LS1:» + Base45( Version | Art | Daten | CRC32 ), Daten = JSON (mit deflate gepackt, wenn der Browser das kann). */
 (function(){
@@ -1776,7 +1776,7 @@ var qrcode = function () {
       '<p class="lsqr-k">Für die Lehrperson</p><h2 class="lsqr-t" id="lsqr-t">Lernstand-Code</h2>' +
       '<div class="lsqr-kids" role="group" aria-label="Kind wählen" hidden></div>' +
       '<div class="lsqr-code"></div><p class="lsqr-who"></p>' +
-      '<p class="lsqr-h">Im Lehrerzimmer auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
+      '<p class="lsqr-h">Auf eduapps.ch unter «Lernstand einlesen» auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
     document.body.appendChild(root);
     root.querySelector('.lsqr-x').onclick = close;
     root.addEventListener('click', function(e){ if(e.target === root) close(); });
@@ -2467,7 +2467,7 @@ textarea{ font: inherit; width:100%; box-sizing:border-box; min-height: 110px; b
 <!-- ÜBERSICHT -->
 <section id="start" class="view">
   <div class="wrap">
-    <a class="pp-back" href="../klasse.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück zum Pausenplatz</a>
+    <a class="pp-back" href="../zurueck.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück</a>
     <div class="start-head">
       <h1 class="title"><span class="anl-mark">A</span>nlaute</h1>
       <div class="head-actions">
@@ -2658,7 +2658,7 @@ textarea{ font: inherit; width:100%; box-sizing:border-box; min-height: 110px; b
     <div class="panel">
       <div>
         <h3>Kinder</h3>
-        <p class="hint">Die App speichert keine Namen. Jedes Kind bekommt ein Bild als Erkennungszeichen und tippt es vor dem Üben an. Notiere von Hand, welches Kind welches Bild hat. Den Namen schreibst du erst auf das Blatt aus dem Lehrerzimmer. Bei 0 Kindern werden die Ergebnisse nicht zugeordnet.</p>
+        <p class="hint">Die App speichert keine Namen. Jedes Kind bekommt ein Bild als Erkennungszeichen und tippt es vor dem Üben an. Notiere von Hand, welches Kind welches Bild hat. Den Namen schreibst du erst auf das Blatt aus «Lernstand einlesen». Bei 0 Kindern werden die Ergebnisse nicht zugeordnet.</p>
         <div class="stepper"><button id="kidMinus" aria-label="Ein Kind weniger">−</button><output id="kidCount" aria-live="polite">0</output><button id="kidPlus" aria-label="Ein Kind mehr">+</button><span>Kinder</span></div>
         <div class="kid-preview" id="kidPreview"></div>
       </div>
@@ -2708,7 +2708,7 @@ textarea{ font: inherit; width:100%; box-sizing:border-box; min-height: 110px; b
       <p class="note" id="voiceNote"></p>
       <div>
         <h3>Lernstand und Ergebnisse</h3>
-        <p class="hint">Den Lernstand eines Kindes siehst du im Lehrerzimmer: Auf der Startseite «Lernstand-Code» antippen und den Code dort scannen. Die Ergebnisse liegen nur auf diesem Gerät.</p>
+        <p class="hint">Den Lernstand eines Kindes siehst du auf eduapps.ch unter «Lernstand einlesen»: Auf der Startseite «Lernstand-Code» antippen und den Code dort scannen. Die Ergebnisse liegen nur auf diesem Gerät.</p>
         <div class="btnrow" id="delRow"><button class="btn small danger" id="delAll">Alle Ergebnisse auf diesem Gerät löschen</button></div>
       </div>
       <button class="btn primary" data-home style="align-self:flex-start">Speichern und zurück</button>
@@ -3671,7 +3671,7 @@ document.addEventListener('keydown', e => {
 applyColor();
 updateStart();
 
-/* ---------- Lernstand-Code fürs Lehrerzimmer ---------- */
+/* ---------- Lernstand-Code für «Lernstand einlesen» ---------- */
 function lsqrHasData(k){ return D.log.some(s => s.kid === k) || D.tests.some(x => x.kid === k && Object.keys(x.res).length); }
 LernstandQR.init({
   app:'anlaute', title:'Anlaute',

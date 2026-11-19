@@ -122,7 +122,7 @@ p{margin:0}
 <main class="seite">
 
   <header class="kopf">
-    <p class="chalk ort">Lehrpersonenzimmer</p>
+    <p class="chalk ort">Freie Lern-Apps für die Primarschule</p>
     <h1>eduapps.ch</h1>
     <div class="idee">
       <p>eduapps.ch ist eine Sammlung kleiner Lern-Apps für die Primarschule, die direkt im Browser laufen: <b>gratis, ohne Anmeldung und ohne Installation.</b> Du wählst in der App-Übersicht passende Apps für deine Klasse aus und bringst sie per QR-Code auf die Tablets.</p>
@@ -1879,6 +1879,7 @@ var ERSATZ = [
 ];
 
 var S = { apps:[], fach:{}, kl:{}, ohneLesen:false, auswahl:[] };
+try { sessionStorage.setItem('eduapps.woher', 'start'); } catch(e){}
 
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function klText(kl){ kl = (kl || []).slice().sort(); return !kl.length ? '' : kl.length === 1 ? kl[0] + '. Klasse' : kl[0] + '. bis ' + kl[kl.length - 1] + '. Klasse'; }
@@ -1916,13 +1917,14 @@ function liste(){
   if (!l.length) { el.innerHTML = '<div class="leer"><h3>Keine App passt zu diesen Filtern</h3><p class="matt">Nimm einen Filter weg. Es kommen laufend neue Apps dazu.</p></div>'; return; }
   el.innerHTML = l.map(function(a){
     var f = FACH[a.fach] || FACH.deutsch, bild = bildVon(a), gew = S.auswahl.indexOf(a.slug) >= 0;
+    var neuTab = a.typ === 'extern' ? ' target="_blank" rel="noopener"' : '';
     return '<article class="app' + (gew ? ' gewaehlt' : '') + '" style="--c:' + f.c + '">' +
-      '<a class="bild" href="' + esc(appLink(a)) + '" target="_blank" rel="noopener" aria-label="' + esc(a.titel) + ' ansehen">' +
+      '<a class="bild" href="' + esc(appLink(a)) + '"' + neuTab + ' aria-label="' + esc(a.titel) + ' ansehen">' +
         (bild ? '<img src="' + bild + '" width="1024" height="768" loading="lazy" alt="Startseite der App ' + esc(a.titel) + '">' : '<span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span>') +
         (a.typ === 'extern' ? '<span class="extern">Externer Link</span>' : '') + '</a>' +
       '<div class="text"><h3>' + esc(a.titel) + '</h3><p class="matt">' + esc(a.uebt || '') + '</p>' +
       '<div class="marken"><span class="f">' + f.n + '</span><span>' + klText(a.klassen) + '</span>' + (a.lesen_noetig === false ? '<span>ohne Lesen</span>' : '') + '</div>' +
-      '<div class="aktionen"><a class="btn" href="' + esc(appLink(a)) + '" target="_blank" rel="noopener">Ansehen</a>' +
+      '<div class="aktionen"><a class="btn" href="' + esc(appLink(a)) + '"' + neuTab + '>Ansehen</a>' +
       '<button class="btn" data-waehle="' + esc(a.slug) + '" aria-pressed="' + gew + '">' + (gew ? 'Für meine Klasse ✓' : '+ Für meine Klasse') + '</button></div></div></article>';
   }).join('');
 }

@@ -83,6 +83,7 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
   var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
   var FARBE = { deutsch:'#ffd23f', mathematik:'#86cdf2', nmg:'#9fdc7c', bewegung_sport:'#ffad66', medien_informatik:'#ffa3bb', ueberfachlich:'#cdbdf2' };
   var MERKEN = 'pausenplatz.board';
+  try { sessionStorage.setItem('eduapps.woher', 'klasse'); } catch(e){}
   var inhalt = document.getElementById('inhalt');
   var titel = document.getElementById('titel');
   var unter = document.getElementById('unter');

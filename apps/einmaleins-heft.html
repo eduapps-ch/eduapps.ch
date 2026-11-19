@@ -2003,7 +2003,7 @@ var qrcode = function () {
  };
 }();
 
-/* Lernstand-Code: zeigt den Lernstand als QR-Code für das Lehrerzimmer.
+/* Lernstand-Code: zeigt den Lernstand als QR-Code für «Lernstand einlesen».
    Alles passiert auf dem Gerät. Es wird nichts gespeichert und nichts gesendet.
    Format: «LS1:» + Base45( Version | Art | Daten | CRC32 ), Daten = JSON (mit deflate gepackt, wenn der Browser das kann). */
 (function(){
@@ -2109,7 +2109,7 @@ var qrcode = function () {
       '<p class="lsqr-k">Für die Lehrperson</p><h2 class="lsqr-t" id="lsqr-t">Lernstand-Code</h2>' +
       '<div class="lsqr-kids" role="group" aria-label="Kind wählen" hidden></div>' +
       '<div class="lsqr-code"></div><p class="lsqr-who"></p>' +
-      '<p class="lsqr-h">Im Lehrerzimmer auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
+      '<p class="lsqr-h">Auf eduapps.ch unter «Lernstand einlesen» auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
     document.body.appendChild(root);
     root.querySelector('.lsqr-x').onclick = close;
     root.addEventListener('click', function(e){ if(e.target === root) close(); });
@@ -2172,7 +2172,7 @@ var qrcode = function () {
 <div class="app">
   <header>
     <div>
-      <a class="zurueck" href="../klasse.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück zum Pausenplatz</a>
+      <a class="zurueck" href="../zurueck.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück</a>
       <p class="kicker">Rechentraining</p>
       <h1 class="title">Einmaleins-<em>Heft</em></h1>
     </div>
@@ -2212,7 +2212,7 @@ var qrcode = function () {
 
 
   <div class="foot-row" style="margin-top:var(--gap-air)">
-    <footer>Es werden keine Daten gespeichert. Wer die Seite neu lädt oder schliesst, beginnt wieder mit einem leeren Heft. Den Lernstand vorher als Lernstand-Code ins Lehrerzimmer übertragen.</footer>
+    <footer>Es werden keine Daten gespeichert. Wer die Seite neu lädt oder schliesst, beginnt wieder mit einem leeren Heft. Den Lernstand vorher als Lernstand-Code ins «Lernstand einlesen» übertragen.</footer>
     <button class="btn line" id="lsqrBtn"><svg class="qr" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2M20 14v.01M14 20h6v-3M18 17v.01"/></g></svg>Lernstand-Code</button>
   </div>
 </div>
@@ -2567,7 +2567,7 @@ $('#levels').addEventListener('click',e=>{
 $('#errStop').onclick=newRound;
 $('#errGo').onclick=startErr;
 
-/* ---------- Lernstand-Code fürs Lehrerzimmer ---------- */
+/* ---------- Lernstand-Code für «Lernstand einlesen» ---------- */
 LernstandQR.init({
   app:'einmaleins', title:'Einmaleins-Heft',
   build(){

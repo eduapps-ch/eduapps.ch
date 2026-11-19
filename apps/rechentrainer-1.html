@@ -1996,7 +1996,7 @@ var qrcode = function () {
  };
 }();
 
-/* Lernstand-Code: zeigt den Lernstand als QR-Code für das Lehrerzimmer.
+/* Lernstand-Code: zeigt den Lernstand als QR-Code für «Lernstand einlesen».
    Alles passiert auf dem Gerät. Es wird nichts gespeichert und nichts gesendet.
    Format: «LS1:» + Base45( Version | Art | Daten | CRC32 ), Daten = JSON (mit deflate gepackt, wenn der Browser das kann). */
 (function(){
@@ -2102,7 +2102,7 @@ var qrcode = function () {
       '<p class="lsqr-k">Für die Lehrperson</p><h2 class="lsqr-t" id="lsqr-t">Lernstand-Code</h2>' +
       '<div class="lsqr-kids" role="group" aria-label="Kind wählen" hidden></div>' +
       '<div class="lsqr-code"></div><p class="lsqr-who"></p>' +
-      '<p class="lsqr-h">Im Lehrerzimmer auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
+      '<p class="lsqr-h">Auf eduapps.ch unter «Lernstand einlesen» auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
     document.body.appendChild(root);
     root.querySelector('.lsqr-x').onclick = close;
     root.addEventListener('click', function(e){ if(e.target === root) close(); });
@@ -2296,7 +2296,11 @@ let ttsVoice = null;
 function pickVoice(){
   try{
     const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-    ttsVoice = vs.find(v => v.lang && v.lang.toLowerCase().startsWith('de') && v.localService === true) || null;
+    const rang = v => { const s = (v.name + ' ' + v.voiceURI).toLowerCase();
+      if(/premium/.test(s)) return 0; if(/enhanced|erweitert|verbessert/.test(s)) return 1;
+      if(/grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley|eloquence|espeak/.test(s)) return 9; return 2; };
+    ttsVoice = vs.filter(v => v.lang && v.lang.toLowerCase().startsWith('de') && v.localService !== false)
+      .sort((x, y) => rang(x) - rang(y) || (/de-CH/i.test(y.lang) - /de-CH/i.test(x.lang)))[0] || null;
   }catch(e){ ttsVoice = null; }
 }
 if(window.speechSynthesis){
@@ -2451,7 +2455,7 @@ const starsV = () => `<div class="stars" aria-label="${st.stars} Sterne">${ic('s
 function homeV(){
   return `
   <header class="top">
-    <a class="btn pausenplatz" href="../klasse.html" aria-label="Zurück zum Pausenplatz">${ic('back')}Pausenplatz</a>
+    <a class="btn pausenplatz" href="../zurueck.html" aria-label="Zurück">${ic('back')}Zurück</a>
     <div class="brand">${chipsV()}<div><b>Rechentrainer</b><small>Zahlenraum bis 20</small></div></div>
     <div class="spacer"></div>
     ${starsV()}
@@ -2623,7 +2627,7 @@ function modalV(){
         <li><b>Geschafft</b> ist eine Stufe bei mindestens 8 von 10 Aufgaben, die beim ersten Versuch und ohne Hilfe richtig waren. Das gelbe Schild «Tipp» zeigt die empfohlene nächste Stufe.</li>
         <li><b>Blitz:</b> Das Bild ist nur kurz sichtbar (6 / 4 / 2,6 Sekunden). Das trainiert das schnelle Erfassen von Mengen statt Abzählen.</li>
         <li><b>Datenschutz:</b> keine Speicherung im Browser, keine Cookies, keine Verbindung ins Internet. Beim Schliessen ist alles weg.</li>
-        <li><b>Lernstand-Code:</b> zeigt den Lernstand als QR-Code. Im Lehrerzimmer (Pausenplatz, Zahnrad oben rechts lange drücken) einscannen und als Blatt drucken. Der Code enthält keinen Namen.</li>
+        <li><b>Lernstand-Code:</b> zeigt den Lernstand als QR-Code. Auf eduapps.ch unter «Lernstand einlesen» einscannen und als Blatt drucken. Der Code enthält keinen Namen.</li>
       </ul>
       <div class="mbtns"><button class="btn mbtn primary" data-a="closeModal">Alles klar</button></div>
     </div></div>`;
@@ -2764,7 +2768,7 @@ document.addEventListener('keydown', e => {
 });
 window.addEventListener('beforeunload', e => { if(st.dirty){ e.preventDefault(); e.returnValue=''; } });
 
-/* ---------------- Lernstand-Code fürs Lehrerzimmer ---------------- */
+/* ---------------- Lernstand-Code für «Lernstand einlesen» ---------------- */
 LernstandQR.init({
   app:'rechentrainer1', title:'Rechentrainer 1',
   build(){

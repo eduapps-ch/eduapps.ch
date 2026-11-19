@@ -11,7 +11,8 @@ Klasse braucht, und bauen daraus mit KI passgenaue Lern-Apps. Sie werden frei ge
   (Fach, Klasse, ohne Lesen) und Auswahl «Für meine Klasse» mit QR-Code
 - `klasse.html#a=slug,slug`: die ausgewählten Apps für die Kinder. Die Auswahl steckt nur im Link;
   das Tablet merkt sich den Link.
-- `apps/`: die Lern-Apps. Der Knopf «Zurück» führt zu `klasse.html`.
+- `apps/`: die Lern-Apps. Der Knopf «Zurück» führt über `zurueck.html` dorthin, woher man kam.
+- Vorlesen: alle Apps nutzen nur Stimmen, die auf dem Gerät laufen (nie Online-Stimmen), Spass-Stimmen zuletzt.
 - `lernstand.html`: Lernstand-Codes der Apps einlesen und als Blätter drucken. Diese Seite darf
   gar keine Verbindung ins Internet aufbauen.
 - `bilder/`: Bilder der Apps für die Startseite
@@ -28,6 +29,6 @@ Klasse braucht, und bauen daraus mit KI passgenaue Lern-Apps. Sie werden frei ge
 
 ## Neue App
 
-1. HTML-Datei in `apps/` legen; der Zurück-Knopf zeigt auf `../klasse.html`.
+1. HTML-Datei in `apps/` legen; der Zurück-Knopf zeigt auf `../zurueck.html` (führt Lehrpersonen zur Übersicht, Kinder zur Klassenseite).
 2. Ein Bild der Startseite (1024 × 768) als `bilder/<dateiname>.jpg` ablegen.
 3. Eintrag in der Katalog-Tabelle `app` (Titel, Pfad, Fach, Klassen, Symbol).

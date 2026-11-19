@@ -1934,7 +1934,7 @@ var qrcode = function () {
  };
 }();
 
-/* Lernstand-Code: zeigt den Lernstand als QR-Code für das Lehrerzimmer.
+/* Lernstand-Code: zeigt den Lernstand als QR-Code für «Lernstand einlesen».
    Alles passiert auf dem Gerät. Es wird nichts gespeichert und nichts gesendet.
    Format: «LS1:» + Base45( Version | Art | Daten | CRC32 ), Daten = JSON (mit deflate gepackt, wenn der Browser das kann). */
 (function(){
@@ -2040,7 +2040,7 @@ var qrcode = function () {
       '<p class="lsqr-k">Für die Lehrperson</p><h2 class="lsqr-t" id="lsqr-t">Lernstand-Code</h2>' +
       '<div class="lsqr-kids" role="group" aria-label="Kind wählen" hidden></div>' +
       '<div class="lsqr-code"></div><p class="lsqr-who"></p>' +
-      '<p class="lsqr-h">Im Lehrerzimmer auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
+      '<p class="lsqr-h">Auf eduapps.ch unter «Lernstand einlesen» auf «Code scannen» tippen und die Kamera auf diesen Code halten. Der Code enthält keinen Namen.</p></div>';
     document.body.appendChild(root);
     root.querySelector('.lsqr-x').onclick = close;
     root.addEventListener('click', function(e){ if(e.target === root) close(); });
@@ -2105,7 +2105,7 @@ var qrcode = function () {
 <!-- ============ START ============ -->
 <section class="screen" id="s-start" aria-labelledby="t-start">
   <div class="wrap">
-    <div><a class="pp-back" href="../klasse.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück zum Pausenplatz</a></div>
+    <div><a class="pp-back" href="../zurueck.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Zurück</a></div>
     <div class="hero-flash">
       <h1 class="display" id="t-start">Blitzlicht</h1>
       <svg viewBox="0 0 24 32" aria-hidden="true"><path d="M15 1 3 18h8l-2 13 12-18h-8z" fill="#FFD54A" stroke="#211C17" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -2290,12 +2290,21 @@ const S = () => DB.cur;
 const lockedLevel = () => DB.settings.lock||0;
 /* Versuch: [zeit, wort, ok, gewählt, typ, stufe, reaktionMs, wiederholung] */
 
-/* ================= Stimme (nur Premium, nur lokal) ================= */
+/* ================= Stimme (nur lokal auf dem Gerät, beste zuerst) =================
+   Safari gibt Webseiten keine Premium-Stimmen frei. Darum: Premium > verbessert > normale Stimme,
+   Spass-Stimmen zuletzt. Online-Stimmen nie. */
 let VOICE = null;
+function rankVoice(v){
+  const s = (v.name+" "+v.voiceURI).toLowerCase();
+  if(/premium/.test(s)) return 0;
+  if(/enhanced|erweitert|verbessert/.test(s)) return 1;
+  if(/grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley|eloquence|espeak/.test(s)) return 9;
+  return 2;
+}
 function findVoice(){
   if(!("speechSynthesis" in window)) return null;
-  const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang) && v.localService===true && /premium|enhanced|erweitert/i.test(v.name+" "+v.voiceURI));
-  vs.sort((a,b)=> (/de-CH/i.test(b.lang)-/de-CH/i.test(a.lang)) || (/premium/i.test(b.name+b.voiceURI)-/premium/i.test(a.name+a.voiceURI)));
+  const vs = speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang) && v.localService!==false);
+  vs.sort((a,b)=> rankVoice(a)-rankVoice(b) || (/de-CH/i.test(b.lang)-/de-CH/i.test(a.lang)));
   return vs[0]||null;
 }
 function initVoice(){ VOICE = findVoice(); }
@@ -2574,25 +2583,25 @@ function dashSettings(){
   const seg=(key,vals,lab)=>`<div class="seg">${vals.map(x=>`<button data-set="${key}" data-val="${x}" aria-pressed="${S_[key]===x}">${lab(x)}</button>`).join("")}</div>`;
   return `
    <div class="next-kid">
-     <p><b>Kind fertig?</b> Zuerst auf der Startseite «Lernstand-Code» antippen und den Code im Lehrerzimmer scannen. Mit «Nächstes Kind» wird die Übung gelöscht und das nächste Kind beginnt neu.</p>
+     <p><b>Kind fertig?</b> Zuerst auf der Startseite «Lernstand-Code» antippen und den Code auf eduapps.ch unter «Lernstand einlesen» scannen. Mit «Nächstes Kind» wird die Übung gelöscht und das nächste Kind beginnt neu.</p>
      <button class="btn red" id="next-kid">Nächstes Kind</button>
    </div>
    <div class="field"><span>Tempo-Regler</span>${seg("lock",[0,1,2,3,4,5],x=>x?"fest: Stufe "+x:"Kind wählt selbst")}<small>Fest eingestellt kann das Kind den Regler nicht verschieben.</small></div>
    <div class="field"><span>Fotos pro Film</span>${seg("filmLen",[8,12,16],x=>x+" Fotos")}<small>Falsch gelesene Wörter kommen im selben Film nochmals dazu.</small></div>
    <div class="field"><span>Welche Wörter?</span>${seg("range",[20,50,100],x=>"die "+x+" häufigsten")}<small>Für den Einstieg in der 1. Klasse eignen sich die 20 häufigsten.</small></div>
    <div class="field"><span>Wort vorlesen nach einem Fehler</span>${seg("voice",[true,false],x=>x?"an":"aus")}
-     <small>${v?`Premium-Stimme gefunden: <b>${esc(v.name)}</b> (läuft lokal auf dem Gerät).`:`Auf diesem Gerät ist keine deutsche Premium-Stimme installiert – darum wird nichts vorgelesen. iPad/iPhone: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch › eine Stimme mit «Premium» laden. Andere Stimmen nutzt die App bewusst nicht.`}</small></div>
+     <small>${v?`Vorlesestimme: <b>${esc(v.name)}</b> (läuft lokal auf dem Gerät).`:`Auf diesem Gerät ist keine deutsche Stimme installiert – darum wird nichts vorgelesen. iPad/iPhone: Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch › eine Stimme mit «Premium» laden. Andere Stimmen nutzt die App bewusst nicht.`}</small></div>
    <div class="field"><span>PIN</span><div class="btn-row"><button class="btn" id="pin-change">PIN ändern</button></div></div>
    <div class="note">Datenschutz: Die App sendet nichts ins Internet und fragt keine Namen ab. Gespeichert ist nur die Übung des Kindes, das gerade am Gerät ist – bis du «Nächstes Kind» drückst. Die Vorlesestimme wird nur genutzt, wenn sie lokal auf dem Gerät läuft.</div>`;
 }
 function wireDash(){
   const B=$("#dash-body");
   B.querySelectorAll("[data-set]").forEach(b=>b.onclick=()=>{ const k=b.dataset.set, raw=b.dataset.val; DB.settings[k]= raw==="true"?true: raw==="false"?false: +raw; if(k==="lock"&&+raw) S().level=+raw; save(); renderDash(); toast("Gespeichert."); });
-  const nk=$("#next-kid"); if(nk) nk.onclick=async()=>{ if(await dialog({title:"Nächstes Kind?",text:"Die Übung wird gelöscht. Wenn du den Lernstand behalten willst, scanne vorher den Lernstand-Code im Lehrerzimmer.",ok:"Löschen und neu beginnen",danger:true})){ DB.cur=newSession(); save(); renderStart(); toast("Bereit für das nächste Kind."); } };
+  const nk=$("#next-kid"); if(nk) nk.onclick=async()=>{ if(await dialog({title:"Nächstes Kind?",text:"Die Übung wird gelöscht. Wenn du den Lernstand behalten willst, scanne vorher den Lernstand-Code auf eduapps.ch unter «Lernstand einlesen».",ok:"Löschen und neu beginnen",danger:true})){ DB.cur=newSession(); save(); renderStart(); toast("Bereit für das nächste Kind."); } };
   const pc=$("#pin-change"); if(pc) pc.onclick=()=>{ DB.settings.pin=null; save(); openPin(); };
 }
 
-/* ================= Lernstand-Code fürs Lehrerzimmer ================= */
+/* ================= Lernstand-Code für «Lernstand einlesen» ================= */
 LernstandQR.init({
   app:"blitzlicht", title:"Blitzlicht",
   build(){
