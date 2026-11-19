@@ -2,15 +2,14 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<!-- Datenschutz: Diese Seite spricht nur mit dem Lehrpersonenzimmer-Server (Supabase, Region Zürich).
-     Gespeichert werden Pseudonyme von Lehrpersonen, Boards und der App-Katalog. Keine Daten von Kindern.
-     Schriften und QR-Erzeuger sind eingebettet, es wird nichts von fremden Adressen geladen.
-     Lernstände werden NICHT hier eingelesen, sondern in lernstand.html, die gar nicht ins Internet darf. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src data:; connect-src https://mfcjwjvdggqvmumamxpk.supabase.co; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<!-- Datenschutz: Diese Seite lädt nur den App-Katalog vom eduapps-Server (Supabase, Region Zürich).
+     Es gibt keine Anmeldung, keine Analyse-Tools und kein Tracking. Schriften und QR-Erzeuger sind eingebettet.
+     Die Auswahl für die Klasse steckt nur im QR-Link und wird nirgends gespeichert. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; font-src data:; connect-src https://mfcjwjvdggqvmumamxpk.supabase.co; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>eduapps.ch – Lehrpersonenzimmer</title>
+<title>eduapps.ch – Lern-Apps für die Primarschule</title>
+<meta name="description" content="Kleine Lern-Apps für die Primarschule. Gratis, ohne Anmeldung, ohne Installation und ohne Daten über die Kinder.">
 <meta name="theme-color" content="#fdf0dc">
 <style>
 @font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(data:font/woff;base64,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) format("woff")}
@@ -20,182 +19,179 @@
 :root{
   color-scheme:light;
   --platz:#fdf0dc;--platz-tief:#f6e2c4;--papier:#fffaf2;--tinte:#2b2342;--tinte-matt:#5d5470;--rosa-tief:#c2335a;
-  --gelb:#ffd23f;--blau:#86cdf2;--gruen:#9fdc7c;--orange:#ffad66;--rosa:#ffa3bb;--lila:#cdbdf2;
+  --gelb:#ffd23f;--gruen:#9fdc7c;
   --font-display:"Fraunces",Georgia,serif;--font-text:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;--font-chalk:"Caveat","Segoe Print",cursive;
 }
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--platz);color:var(--tinte);font-family:var(--font-text);font-size:16px;line-height:1.5}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--platz);color:var(--tinte);font-family:var(--font-text);font-size:17px;line-height:1.55}
 [hidden]{display:none!important}
 h1,h2,h3{font-family:var(--font-display);line-height:1.1;margin:0}
-h1{font-weight:900;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.02em}
-h2{font-weight:800;font-size:1.5rem}
 p{margin:0}
 .chalk{font-family:var(--font-chalk);font-weight:700;color:var(--rosa-tief)}
 .matt{color:var(--tinte-matt)}
 .klein{font-size:14px}
+.seite{max-width:1180px;margin:0 auto;padding:48px max(16px,3vw) 120px;display:flex;flex-direction:column;gap:64px}
 .btn{font:inherit;font-weight:700;font-size:15px;min-height:44px;padding:0 16px;border-radius:12px;border:2px solid var(--tinte);background:var(--papier);color:var(--tinte);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:transform .12s}
 .btn:hover{transform:translateY(-2px) rotate(-.5deg)}
 .btn.dunkel{background:var(--tinte);color:var(--platz)}
-.btn.rot{border-color:var(--rosa-tief);color:var(--rosa-tief)}
-.btn.rot.voll{background:var(--rosa-tief);color:#fff}
-.btn:disabled{opacity:.5;cursor:default;transform:none}
-.btn svg,.ibtn svg,.chip svg{width:18px;height:18px;flex:none}
-.ibtn{width:44px;height:44px;border-radius:12px;border:2px solid var(--tinte);background:var(--papier);color:var(--tinte);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.ibtn:hover{background:var(--gelb)}
+.btn.gross{min-height:52px;font-size:17px;padding:0 22px}
+.btn svg{width:20px;height:20px;flex:none}
 .chip{font:inherit;font-weight:700;font-size:15px;min-height:44px;min-width:44px;padding:0 14px;border-radius:999px;border:2px solid var(--tinte);background:transparent;color:var(--tinte);cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--tinte);color:var(--platz)}
 .chip.fach{border-style:dashed}
 .chip.fach[aria-pressed="true"]{background:var(--c);color:var(--tinte);border-style:solid}
-:is(.btn,.ibtn,.chip,a,input,select,textarea,summary):focus-visible{outline:3px solid var(--rosa-tief);outline-offset:2px}
-.inp{font:inherit;font-size:16px;min-height:44px;padding:8px 12px;border-radius:10px;border:2px solid var(--tinte);background:#fff;color:var(--tinte);width:100%}
-textarea.inp{resize:vertical}
-.lbl{display:block;font-weight:700;font-size:14px;margin:0 0 6px}
-.feldgruppe{display:flex;flex-direction:column;gap:14px}
+:is(.btn,.chip,a,button):focus-visible{outline:3px solid var(--rosa-tief);outline-offset:2px}
 .reihe{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 
 /* Kopf */
-.kopf{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:16px max(16px,2vw);border-bottom:3px dashed rgba(43,35,66,.25)}
-.marke{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:inherit}
-.marke .chalk{font-size:26px;transform:rotate(-4deg);display:inline-block}
-.marke b{font-family:var(--font-display);font-weight:900;font-size:28px;letter-spacing:-.02em}
-.nav{display:flex;flex-wrap:wrap;gap:8px;flex:1 1 auto}
-.ich{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.ich .name{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--gruen);font-weight:700}
-main{padding:28px max(16px,2vw) 40px;max-width:1440px;margin:0 auto}
-.fuss{margin:0 max(16px,2vw);padding:18px 0 40px;border-top:2px solid var(--platz-tief);font-size:14px;color:var(--tinte-matt);display:flex;flex-wrap:wrap;gap:6px 24px}
+.kopf{display:flex;flex-direction:column;gap:18px}
+.kopf .ort{font-size:34px;line-height:1;transform:rotate(-3deg);transform-origin:left center;width:max-content}
+.kopf h1{font-weight:900;font-size:clamp(3.2rem,9vw,5.5rem);line-height:.95;letter-spacing:-.025em}
+.idee{display:flex;flex-direction:column;gap:12px;max-width:64ch;font-size:19px}
+.idee b{font-weight:700}
 
-/* Layout mit Seitenleiste */
-.zweispaltig{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
-.seite-links{flex:1 1 260px;max-width:340px;display:flex;flex-direction:column;gap:22px}
-.inhalt{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
-.kopfzeile{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+/* So funktioniert's */
+.ablauf{display:flex;flex-direction:column;gap:12px}
+.ablauf h2,.uebersicht h2{font-weight:900;font-size:clamp(2rem,4vw,2.6rem);letter-spacing:-.015em}
+.karten2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px;margin-top:10px}
+.karte{background:var(--papier);border:3px solid var(--tinte);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.karte:first-child{transform:rotate(-.5deg)}
+.karte:last-child{transform:rotate(.4deg);background:#fff3c4}
+.karte .ort{font-size:26px;line-height:1}
+.karte h3{font-size:26px;font-weight:800}
+.karte ol{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:9px}
+.karte li::marker{font-family:var(--font-chalk);font-weight:700;font-size:1.3em;color:var(--rosa-tief)}
+.karte .fuss{margin-top:auto;padding-top:6px}
 
-/* Anmelden */
-.willkommen{max-width:1100px;margin:0 auto;padding:40px 0;display:flex;flex-direction:column;gap:36px}
-.willkommen .gross{font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,8vw,4.5rem);line-height:1;letter-spacing:-.02em}
-.formkarten{display:flex;flex-wrap:wrap;gap:24px}
-.formkarte{flex:1 1 320px;background:var(--papier);border:3px solid var(--tinte);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:16px}
-.formkarte.neu{background:#fff3c4;border-style:dashed}
-.fehler{color:var(--rosa-tief);font-weight:700}
-.willkommen .gross{hyphens:manual;overflow-wrap:break-word}
-.idee{display:flex;flex-direction:column;gap:10px;margin-top:14px;max-width:62ch;font-size:19px;line-height:1.5}
-.galerie-block{display:flex;flex-direction:column;gap:10px}
-.qr-erklaerung{display:flex;flex-direction:column;gap:10px}
-.qr-raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px;margin-top:8px}
-.qr-karte{background:var(--papier);border:3px solid var(--tinte);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px}
-.qr-karte:first-child{transform:rotate(-.5deg)}.qr-karte:last-child{transform:rotate(.4deg);background:#fff3c4}
-.qr-karte h3{font-size:24px}
-.qr-karte ol{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:8px;font-size:17px}
-.qr-karte li::marker{font-family:var(--font-chalk);font-weight:700;font-size:1.3em;color:var(--rosa-tief)}
-.galerie{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:22px;margin-top:8px}
-.galerie figure{margin:0;display:flex;flex-direction:column;gap:10px}
-.galerie figure:nth-child(odd){transform:rotate(-.6deg)}.galerie figure:nth-child(even){transform:rotate(.5deg)}
-.galerie a{display:block;border:3px solid var(--tinte);border-radius:14px;overflow:hidden;background:#fff}
-.galerie img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
-.galerie a:hover{transform:translateY(-3px)}
-.galerie figcaption{display:flex;flex-direction:column;gap:2px}
-.galerie figcaption b{font-family:var(--font-display);font-size:20px}
-.galerie figcaption span{color:var(--tinte-matt);font-size:15px}
-.galerie .stufe{align-self:flex-start;margin-top:4px;padding:1px 10px;border-radius:999px;background:var(--tinte);color:var(--platz)!important;font-size:12px!important;font-weight:700}
-
-/* Katalog */
-.karten{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-.appkarte{background:var(--papier);border:2px solid var(--tinte);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.appkarte .bild{position:relative;height:112px;background:var(--c);display:flex;align-items:center;justify-content:center}
-.appkarte .bild .zeichen{font-family:var(--font-chalk);font-weight:700;font-size:52px;line-height:1}
-.appkarte .stern{position:absolute;top:8px;right:8px;background:rgba(255,250,242,.85);border-color:transparent}
-.appkarte .extern{position:absolute;top:12px;left:12px;padding:2px 10px;border-radius:999px;background:var(--tinte);color:var(--platz);font-size:12px;font-weight:700}
-.appkarte .text{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
-.appkarte h3{font-size:21px;line-height:1.2}
+/* App-Übersicht */
+.uebersicht{display:flex;flex-direction:column;gap:18px;scroll-margin-top:20px}
+.filter{display:flex;flex-direction:column;gap:14px;padding:20px;border-radius:16px;background:var(--papier);border:2px solid var(--platz-tief)}
+.filter .lbl{font-weight:700;font-size:14px;margin:0 0 6px;display:block}
+.treffer{font-weight:700}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:24px}
+.app{background:var(--papier);border:3px solid var(--tinte);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.app.gewaehlt{border-color:var(--rosa-tief);box-shadow:0 0 0 3px var(--rosa-tief)}
+.app .bild{display:block;aspect-ratio:4/3;background:var(--c);position:relative;overflow:hidden}
+.app .bild img{display:block;width:100%;height:100%;object-fit:cover}
+.app .bild .zeichen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-chalk);font-weight:700;font-size:72px}
+.app .extern{position:absolute;top:10px;left:10px;padding:2px 10px;border-radius:999px;background:var(--tinte);color:var(--platz);font-size:12px;font-weight:700}
+.app .text{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.app h3{font-size:23px;font-weight:800}
 .marken{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:700}
-.marken span{padding:2px 8px;border-radius:999px;border:1.5px solid var(--tinte)}
-.marken span.f{background:var(--c);border-color:transparent}
-.appkarte .aktionen{display:flex;gap:8px;margin-top:auto;padding-top:8px}
-.appkarte .aktionen .btn{flex:1}
-.btn.drin{background:var(--gruen)}
-.leer{border:4px dashed var(--tinte-matt);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.marken span{padding:2px 9px;border-radius:999px;border:1.5px solid var(--tinte)}
+.marken .f{background:var(--c);border-color:transparent}
+.app .aktionen{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:10px}
+.app .aktionen .btn{flex:1 1 auto}
+.btn[aria-pressed="true"]{background:var(--rosa-tief);border-color:var(--rosa-tief);color:#fff}
+.leer{border:4px dashed var(--tinte-matt);border-radius:14px;padding:24px}
 
-/* Boards */
-.boardknopf{text-align:left;font:inherit;color:var(--tinte);cursor:pointer;padding:14px 16px;border-radius:14px;border:2px solid var(--tinte);background:var(--papier);display:flex;flex-direction:column;gap:2px;width:100%}
-.boardknopf:nth-child(odd){transform:rotate(-.8deg)}.boardknopf:nth-child(even){transform:rotate(.6deg)}
-.boardknopf[aria-current="true"]{background:var(--gelb)}
-.boardknopf b{font-family:var(--font-display);font-size:19px}
-.fokusband{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:16px;background:var(--rosa-tief);color:#fff;font-size:18px}
-.tipp{padding:12px 16px;border-radius:12px;border:2px dashed var(--tinte-matt);color:var(--tinte-matt)}
-.kacheln{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
-.kachel{border-radius:18px;padding:12px;background:var(--papier);border:3px solid var(--tinte);display:flex;flex-direction:column;gap:10px}
-.kachel.aus{opacity:.5}
-.kachel.fokussiert{border-color:var(--rosa-tief)}
-.kachel .bild{position:relative;aspect-ratio:1/1;border-radius:12px;background:var(--c);display:flex;align-items:center;justify-content:center}
-.kachel .nr{position:absolute;top:4px;left:12px;font-family:var(--font-chalk);font-weight:700;font-size:30px;line-height:1}
-.kachel .zeichen{font-family:var(--font-chalk);font-weight:700;font-size:60px;line-height:1}
-.kachel b{font-family:var(--font-display);font-size:18px;line-height:1.2}
-.ibtn[aria-pressed="true"]{background:var(--rosa-tief);color:#fff;border-color:var(--rosa-tief)}
-.plus{min-height:200px;border-radius:18px;border:3px dashed var(--tinte-matt);background:transparent;color:var(--tinte-matt);font-family:var(--font-chalk);font-weight:700;font-size:30px;cursor:pointer}
-.team{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;padding:20px;border-radius:16px;background:#fff3c4}
-.person{display:inline-flex;align-items:center;gap:4px;padding:0 4px 0 14px;border-radius:999px;background:var(--gruen);font-weight:700;min-height:44px}
-.person .ibtn{width:36px;height:36px;border:none;background:transparent}
-.einstellungen{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+/* Auswahl-Leiste */
+.leiste{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:5;width:min(calc(100% - 24px),760px);background:var(--tinte);color:var(--platz);border-radius:18px;padding:12px 14px 12px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(43,35,66,.3)}
+.leiste .was{flex:1 1 200px;font-weight:700}
+.leiste .btn{border-color:var(--platz)}
+.leiste .btn.hell{background:transparent;color:var(--platz)}
+.leiste .btn.voll{background:var(--gelb);border-color:var(--gelb);color:var(--tinte)}
 
-/* Teilen */
+/* QR-Dialog */
 .schleier{position:fixed;inset:0;background:rgba(43,35,66,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:10}
-.dialog{background:var(--platz);border:3px solid var(--tinte);border-radius:22px;padding:28px;max-width:780px;width:100%;display:flex;flex-wrap:wrap;gap:28px;max-height:92vh;overflow:auto}
+.dialog{background:var(--platz);border:3px solid var(--tinte);border-radius:22px;padding:28px;max-width:820px;width:100%;display:flex;flex-wrap:wrap;gap:28px;max-height:92vh;overflow:auto}
 .qr{flex:0 0 auto;background:#fff;padding:14px;border-radius:14px;border:2px solid var(--tinte);align-self:flex-start}
 .qr svg{display:block;width:260px;height:260px}
-.link{padding:10px 14px;border-radius:10px;background:#fff;border:2px dashed var(--tinte);font-family:ui-monospace,Menlo,monospace;font-size:14px;overflow-wrap:anywhere}
+.dialog .rechts{flex:1 1 280px;display:flex;flex-direction:column;gap:12px}
+.link{padding:10px 14px;border-radius:10px;background:#fff;border:2px dashed var(--tinte);font-family:ui-monospace,Menlo,monospace;font-size:13px;overflow-wrap:anywhere}
+.auswahl-liste{margin:0;padding-left:1.2em}
 
-/* Kinder-Vorschau */
-.tablet{width:100%;max-width:1040px;margin:0 auto;border:18px solid var(--tinte);border-radius:40px;background:var(--platz);padding:32px;display:flex;flex-direction:column;gap:24px;min-height:560px}
-.kfelder{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
-.kfeld{aspect-ratio:1/1;border-radius:8px 14px 6px 12px;background:var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center}
-.kfeld:nth-child(odd){transform:rotate(-1deg)}.kfeld:nth-child(even){transform:rotate(.8deg)}
-.kfeld .zeichen{font-family:var(--font-chalk);font-weight:700;font-size:72px;line-height:1}
-.kfeld b{font-family:var(--font-display);font-size:20px;line-height:1.15}
-.kfokus{display:flex;justify-content:center}
-.kfokus .kfeld{width:min(100%,520px);aspect-ratio:1.3/1}
-.kfokus .zeichen{font-size:130px}
-
-/* Rückmeldung, Verwaltung */
-.liste{display:flex;flex-direction:column;gap:10px}
-.eintrag{padding:14px 16px;border-radius:14px;border:2px solid var(--tinte);background:var(--papier);display:flex;flex-direction:column;gap:6px}
-.eintrag.fehlerart{background:#ffe0e8}.eintrag.wunschart{background:#fff3c4}
-.eintrag.erledigt{opacity:.55}
-.eintrag .oben{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px;font-weight:700}
-.tabelle{overflow-x:auto;border:2px solid var(--tinte);border-radius:16px;background:var(--papier)}
-table{width:100%;border-collapse:collapse;min-width:680px}
-th,td{padding:10px 16px;text-align:left;vertical-align:middle}
-thead tr{background:var(--platz-tief)}
-tbody tr{border-top:2px solid var(--platz-tief)}
-.rolle{padding:2px 10px;border-radius:999px;font-weight:700;font-size:14px}
-.code{font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:17px}
-.pw{padding:6px 12px;border-radius:10px;background:var(--gruen);font-size:14px}
-.raster2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.raster2 .ganz{grid-column:1/-1}
-.haken{display:inline-flex;gap:8px;align-items:center;min-height:32px}
-.mini{width:44px;height:44px;border-radius:10px;background:var(--c);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-chalk);font-weight:700;font-size:19px;flex:none}
-
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) rotate(-1deg);background:var(--tinte);color:var(--platz);padding:14px 22px;border-radius:14px;font-weight:700;z-index:20;max-width:calc(100% - 32px)}
-.laden{padding:40px 0;text-align:center;color:var(--tinte-matt);font-family:var(--font-chalk);font-size:28px}
-
-@media (max-width:600px){ .raster2{grid-template-columns:minmax(0,1fr)} .qr svg{width:200px;height:200px} .tablet{border-width:10px;padding:18px} }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media print{
-  body.druck-qr > *:not(#plakat){display:none!important}
-  #plakat{display:flex!important;flex-direction:column;align-items:center;gap:24px;padding:40px;text-align:center}
-  #plakat svg{width:120mm;height:120mm}
-}
+.fusszeile{border-top:2px solid var(--platz-tief);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:14px;color:var(--tinte-matt)}
+.fusszeile a{color:var(--tinte);font-weight:700}
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) rotate(-1deg);background:var(--tinte);color:var(--platz);padding:14px 22px;border-radius:14px;font-weight:700;z-index:20;max-width:calc(100% - 32px)}
 #plakat{display:none}
+@media (max-width:600px){ .qr svg{width:210px;height:210px} .seite{gap:48px;padding-top:32px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{
+  body.druck > *:not(#plakat){display:none!important}
+  #plakat{display:flex!important;flex-direction:column;align-items:center;gap:20px;padding:30px;text-align:center}
+  #plakat svg{width:110mm;height:110mm}
+}
 </style>
 </head>
 <body>
-<header class="kopf" id="kopf" hidden></header>
-<main id="app"><p class="laden">Einen Moment …</p></main>
-<footer class="fuss" id="fuss" hidden>
-  <span>Kinder: kein Login, keine Personendaten</span>
-  <span>Lehrpersonen: nur Pseudonym</span>
-  <span>Server: Supabase, Region Zürich</span>
-  <span>Keine Analyse-Tools, kein Tracking</span>
-</footer>
+<main class="seite">
+
+  <header class="kopf">
+    <p class="chalk ort">Lehrpersonenzimmer</p>
+    <h1>eduapps.ch</h1>
+    <div class="idee">
+      <p>eduapps.ch ist eine Sammlung kleiner Lern-Apps für die Primarschule, die direkt im Browser laufen: <b>gratis, ohne Anmeldung und ohne Installation.</b> Du wählst in der App-Übersicht passende Apps für deine Klasse aus und bringst sie per QR-Code auf die Tablets.</p>
+      <p>Willst du wissen, wo ein Kind steht, zeigt die App auf Knopfdruck einen <b>Lernstand-Code</b>. Du scannst ihn mit deinem Gerät unter «Lernstand einlesen» und druckst daraus ein Blatt fürs Lernheft.</p>
+      <p><b>Der Datenschutz ist eingebaut:</b> Die Apps speichern keine Namen und senden keine Daten über die Kinder ins Internet. Lernstände bleiben auf dem Gerät, bis du sie einliest.</p>
+    </div>
+    <div class="reihe">
+      <a class="btn dunkel gross" href="#apps">Zur App-Übersicht
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="btn gross" href="lernstand.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 12h8"/></g></svg>
+        Lernstand einlesen</a>
+    </div>
+  </header>
+
+  <section class="ablauf" aria-labelledby="ablaufT">
+    <h2 id="ablaufT">So funktioniert's</h2>
+    <p class="matt">Es gibt zwei Arten von QR-Codes: Einer bringt die Apps auf die Tablets, der andere bringt den Lernstand eines Kindes zu dir.</p>
+    <div class="karten2">
+      <div class="karte">
+        <p class="chalk ort">Von dir zum Kind</p>
+        <h3>Apps auf die Tablets bringen</h3>
+        <ol>
+          <li>In der App-Übersicht die passenden Apps antippen: «Für meine Klasse».</li>
+          <li>Unten auf «QR-Code erstellen» tippen. Der Code erscheint auf dem Bildschirm, auf Wunsch auch als Plakat zum Ausdrucken.</li>
+          <li>Die Kinder scannen den Code mit der Kamera des Tablets. Ihre Apps erscheinen als grosse Felder, und das Tablet merkt sich die Auswahl.</li>
+          <li>Neue Woche, neue Apps? Einfach eine neue Auswahl treffen und den neuen Code scannen lassen.</li>
+        </ol>
+        <p class="fuss"><a class="btn dunkel" href="#apps">Apps auswählen</a></p>
+      </div>
+      <div class="karte">
+        <p class="chalk ort">Vom Kind zu dir</p>
+        <h3>Lernstand einlesen</h3>
+        <ol>
+          <li>Das Kind tippt in der App auf der Startseite auf «Lernstand-Code». Auf seinem Tablet erscheint ein QR-Code mit dem Lernstand, ohne Namen.</li>
+          <li>Du öffnest auf deinem Gerät «Lernstand einlesen» und tippst auf «Code scannen». Die Kamera liest den Code direkt vom Tablet des Kindes. Ohne Kamera geht auch ein Foto des Codes.</li>
+          <li>Aus jedem Code entsteht ein Blatt mit dem Lernstand. Scanne mehrere Kinder nacheinander und drucke alle Blätter zusammen, als ganze oder halbe Seite.</li>
+          <li>Namen von Hand auf das Blatt schreiben und ins Lernheft kleben.</li>
+        </ol>
+        <p class="klein matt">Die Kamera wird nur auf deinem Gerät ausgewertet. Nichts wird gespeichert oder gesendet.</p>
+        <p class="fuss"><a class="btn dunkel" href="lernstand.html">Lernstand einlesen</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uebersicht" id="apps" aria-labelledby="appsT">
+    <h2 id="appsT">App-Übersicht</h2>
+    <div class="filter" aria-label="Filter">
+      <div><span class="lbl">Fachbereich</span><div class="reihe" id="fFach"></div></div>
+      <div><span class="lbl">Klasse</span><div class="reihe" id="fKlasse"></div></div>
+      <div class="reihe">
+        <button class="chip" id="fLesen" aria-pressed="false" style="border-radius:12px">Ohne Lesen spielbar</button>
+        <button class="btn" id="fReset" style="border:none;background:none;text-decoration:underline;color:var(--rosa-tief)">Filter zurücksetzen</button>
+      </div>
+    </div>
+    <p class="treffer" id="treffer" aria-live="polite"></p>
+    <div class="apps" id="liste"></div>
+  </section>
+
+  <footer class="fusszeile">
+    <span>Gratis, ohne Anmeldung, ohne Werbung</span>
+    <span>Keine Daten über Kinder, keine Analyse-Tools, kein Tracking</span>
+    <span>App-Katalog auf einem Server in Zürich</span>
+    <a href="https://benihonegger-source.github.io/LandingpageApps/" target="_blank" rel="noopener">Pausenplatz der Kinder</a>
+  </footer>
+</main>
+
+<div class="leiste" id="leiste" hidden role="region" aria-label="Auswahl für die Klasse">
+  <span class="was" id="leisteText"></span>
+  <button class="btn hell" id="leeren">Auswahl leeren</button>
+  <button class="btn voll" id="qrKnopf">QR-Code erstellen</button>
+</div>
 <div id="dialog"></div>
 <div id="plakat"></div>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -1857,656 +1853,131 @@ var qrcode = function () {
 
 var SUPA = 'https://mfcjwjvdggqvmumamxpk.supabase.co';
 var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
-var MAIL = function(p){ return String(p).trim().toLowerCase() + '@lehrerzimmer.invalid'; };
+var APP_BASIS = 'https://benihonegger-source.github.io/LandingpageApps/';
+var BILDER = { 'rechentrainer-1':1, 'anlaute':1, 'einmaleins-heft':1, 'tierbibliothek':1, 'blitzlesen':1, 'lesezug':1 };
 var FACH = {
   deutsch:{n:'Deutsch',c:'#ffd23f'}, mathematik:{n:'Mathematik',c:'#86cdf2'}, nmg:{n:'NMG',c:'#9fdc7c'},
   bewegung_sport:{n:'Bewegung & Sport',c:'#ffad66'}, medien_informatik:{n:'Medien & Informatik',c:'#ffa3bb'}, ueberfachlich:{n:'Überfachlich',c:'#cdbdf2'}
 };
-var ROLLE = { admin:'Admin', subadmin:'Sub-Admin', lehrperson:'Lehrperson' };
-var ROLLE_FARBE = { admin:'#ffd23f', subadmin:'#ffa3bb', lehrperson:'#86cdf2' };
-var ZEICHEN = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-
-var I = {
-  pfeil:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  zurueck:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  links:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  rechts:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
-  fokus:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>',
-  auge:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
-  qr:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM18 18h3v3h-3z" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
-  kopie:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 4H6a2 2 0 0 0-2 2v10" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
-  plus:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
-  blase:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
-  person:'<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-  scan:'<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 12h8"/></g></svg>',
-  stern:function(an){ return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="' + (an ? '#c2335a' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'; }
-};
-
-/* ---------------- Zustand ---------------- */
-var S = {
-  session:null, ich:null, view:'login', loginTab:'anmelden', fehler:'',
-  apps:[], favs:{}, boards:[], aktiv:null,
-  f:{ kl:{}, fach:{}, dauer:'', q:'', ohneLesen:false, nurFav:false },
-  teilen:false, loeschenFrage:false,
-  fb:{ art:'fehler', app:'', text:'' }, meldungen:[],
-  vTab:'', einladungen:[], lps:[], pwInfo:null, appForm:null
-};
-
-/* ---------------- Hilfen ---------------- */
-function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-function zufall(n){ var a = crypto.getRandomValues(new Uint32Array(n)), s = ''; for (var i = 0; i < n; i++) s += ZEICHEN[a[i] % ZEICHEN.length]; return s; }
-function klText(kl){ kl = (kl || []).slice().sort(); return !kl.length ? '' : kl.length === 1 ? kl[0] + '. Kl.' : kl[0] + '.–' + kl[kl.length - 1] + '. Kl.'; }
-function appById(id){ for (var i = 0; i < S.apps.length; i++) if (S.apps[i].id === id) return S.apps[i]; return null; }
-function boardById(id){ for (var i = 0; i < S.boards.length; i++) if (S.boards[i].id === id) return S.boards[i]; return null; }
-function aktivesBoard(){ return boardById(S.aktiv) || S.boards[0] || null; }
-function istKatalogAdmin(){ return S.ich && (S.ich.rolle === 'admin' || S.ich.rolle === 'subadmin'); }
-function istAdmin(){ return S.ich && S.ich.rolle === 'admin'; }
-function boardLink(b){ return new URL('klasse.html#' + b.code, location.href).href; }
-var APP_BASIS = 'https://benihonegger-source.github.io/LandingpageApps/';
-function appLink(a){ return a.typ === 'extern' ? a.url : new URL(a.url, APP_BASIS).href; }
-var toastTimer = null;
-function toast(t){ var el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function(){ el.hidden = true; }, 2600); }
-function deutsch(msg){
-  msg = String(msg || '');
-  if (/invalid login credentials/i.test(msg)) return 'Pseudonym oder Passwort stimmt nicht.';
-  if (/password should be at least|weak/i.test(msg)) return 'Das Passwort ist zu kurz oder zu einfach.';
-  if (/same_password|should be different/i.test(msg)) return 'Bitte ein anderes Passwort als bisher wählen.';
-  if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) return 'Keine Verbindung zum Server. WLAN prüfen.';
-  return msg;
-}
-function ladeSession(){ try { return JSON.parse(localStorage.getItem('lehrerzimmer.sitzung')); } catch(e){ return null; } }
-function merkeSession(s){ try { if (s) localStorage.setItem('lehrerzimmer.sitzung', JSON.stringify(s)); else localStorage.removeItem('lehrerzimmer.sitzung'); } catch(e){} }
-
-/* ---------------- Server ---------------- */
-function auth(pfad, body, methode, mitToken){
-  var h = { apikey:KEY, 'Content-Type':'application/json' };
-  var p = mitToken ? token().then(function(t){ h.Authorization = 'Bearer ' + t; }) : Promise.resolve();
-  return p.then(function(){ return fetch(SUPA + '/auth/v1/' + pfad, { method:methode || 'POST', headers:h, body:JSON.stringify(body || {}) }); })
-    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){
-      if (!r.ok) throw new Error(j.error_description || j.msg || j.message || j.error_code || ('Fehler ' + r.status));
-      return j; }); });
-}
-function setzeSession(j){
-  S.session = { access_token:j.access_token, refresh_token:j.refresh_token, ablauf:Date.now() + (j.expires_in - 60) * 1000, uid:j.user.id };
-  merkeSession(S.session);
-}
-function token(){
-  if (!S.session) return Promise.reject(new Error('Nicht angemeldet'));
-  if (Date.now() < S.session.ablauf) return Promise.resolve(S.session.access_token);
-  return auth('token?grant_type=refresh_token', { refresh_token:S.session.refresh_token })
-    .then(function(j){ setzeSession(j); return S.session.access_token; })
-    .catch(function(){ abmelden(true); throw new Error('Bitte neu anmelden.'); });
-}
-function api(pfad, o){
-  o = o || {};
-  return token().then(function(t){
-    var h = { apikey:KEY, Authorization:'Bearer ' + t };
-    if (o.body !== undefined) h['Content-Type'] = 'application/json';
-    if (o.prefer) h.Prefer = o.prefer;
-    return fetch(SUPA + pfad, { method:o.method || 'GET', headers:h, body:o.body === undefined ? undefined : JSON.stringify(o.body) });
-  }).then(function(r){ return r.text().then(function(t){
-    var j = null; try { j = t ? JSON.parse(t) : null; } catch(e){}
-    if (!r.ok) throw new Error((j && (j.fehler || j.message || j.msg)) || ('Fehler ' + r.status));
-    return j; }); });
-}
-function rest(p, o){ return api('/rest/v1/' + p, o); }
-function rpc(n, a){ return api('/rest/v1/rpc/' + n, { method:'POST', body:a || {} }); }
-function fehlerToast(e){ toast(deutsch(e && e.message)); }
-
-/* ---------------- Laden ---------------- */
-function ladeIch(){ return rest('profile?id=eq.' + S.session.uid + '&select=*').then(function(r){ S.ich = r && r[0]; if (!S.ich) throw new Error('Kein Profil gefunden.'); }); }
-function ladeApps(){ return rest('app?select=*&order=titel').then(function(r){ S.apps = r || []; }); }
-function ladeFavs(){ return rest('favorit?select=app_id').then(function(r){ S.favs = {}; (r || []).forEach(function(x){ S.favs[x.app_id] = true; }); }); }
-function ladeBoards(){
-  return rest('board?select=id,name,code,fokus_app_id,besitzer_id,erstellt_am,board_app(app_id,position),board_mitglied(lp_id,rolle,profile(pseudonym))&order=erstellt_am')
-    .then(function(r){
-      S.boards = (r || []).map(function(b){
-        b.apps = (b.board_app || []).slice().sort(function(x, y){ return x.position - y.position; }).map(function(x){ return x.app_id; });
-        b.team = (b.board_mitglied || []).filter(function(m){ return m.lp_id !== S.session.uid; })
-          .map(function(m){ return { id:m.lp_id, name:(m.profile && m.profile.pseudonym) || 'Lehrperson', rolle:m.rolle }; });
-        return b;
-      });
-      if (!boardById(S.aktiv)) S.aktiv = S.boards.length ? S.boards[0].id : null;
-    });
-}
-function starte(){
-  return ladeIch().then(function(){
-    if (S.ich.muss_passwort_aendern) { S.view = 'passwort'; render(); return; }
-    return Promise.all([ladeApps(), ladeFavs(), ladeBoards()]).then(function(){
-      if (S.view === 'login' || S.view === 'passwort') S.view = 'katalog';
-      render();
-    });
-  });
-}
-function abmelden(still){
-  if (S.session && !still) { auth('logout', {}, 'POST', true).catch(function(){}); }
-  S.session = null; S.ich = null; S.view = 'login'; S.boards = []; S.apps = [];
-  merkeSession(null); render();
-}
-
-/* ---------------- Darstellung ---------------- */
-function render(){
-  var kopf = document.getElementById('kopf'), fuss = document.getElementById('fuss'), app = document.getElementById('app');
-  var drin = !!(S.ich && S.view !== 'login' && S.view !== 'passwort');
-  kopf.hidden = !drin; fuss.hidden = !drin;
-  if (drin) kopf.innerHTML = kopfHtml();
-  var v = { login:loginHtml, passwort:passwortHtml, katalog:katalogHtml, boards:boardsHtml, kind:kindHtml, meldung:meldungHtml, verwaltung:verwaltungHtml }[S.view] || loginHtml;
-  app.innerHTML = v();
-  document.getElementById('dialog').innerHTML = (S.view === 'boards' && S.teilen) ? teilenHtml() : '';
-  if (S.view === 'katalog') katalogListe();
-  document.title = 'eduapps.ch – Lehrpersonenzimmer';
-}
-function kopfHtml(){
-  var punkte = [['katalog','Katalog'],['boards','Meine Boards'],['meldung','Rückmeldung']];
-  if (istKatalogAdmin()) punkte.push(['verwaltung','Verwaltung']);
-  return '<a class="marke" href="./" title="Zur Startseite"><span class="chalk">Lehrpersonenzimmer</span><b>eduapps.ch</b></a>' +
-    '<nav class="nav" aria-label="Bereiche">' + punkte.map(function(p){
-      var an = S.view === p[0] || (p[0] === 'boards' && S.view === 'kind');
-      return '<button class="chip" data-act="gehe" data-v="' + p[0] + '" aria-pressed="' + an + '">' + p[1] + '</button>';
-    }).join('') + '<a class="chip" href="lernstand.html" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">' + I.scan + 'Lernstand einlesen</a></nav>' +
-    '<div class="ich"><span class="name">' + I.person + esc(S.ich.pseudonym) + ' · ' + ROLLE[S.ich.rolle] + '</span>' +
-    '<button class="btn" data-act="pwAendern">Passwort ändern</button><button class="btn" data-act="abmelden">Abmelden</button></div>';
-}
-
-function loginHtml(){
-  var neu = S.loginTab === 'neu';
-  return '<div class="willkommen">' +
-    '<div><p class="chalk" style="font-size:34px;transform:rotate(-3deg);width:max-content">Lehrpersonenzimmer</p>' +
-    '<h1 class="gross">eduapps.ch</h1>' +
-    '<div class="idee"><p>eduapps.ch ist eine Sammlung kleiner Lern-Apps für die Primarschule, die direkt im Browser laufen: Du wählst hier passende Apps aus, legst sie auf das Board deiner Klasse, und die Kinder öffnen es per QR-Code auf dem Tablet, ohne Login und ohne Installation.</p>' +
-    '<p>Der Datenschutz ist eingebaut: Die Apps speichern keine Namen und senden keine Daten über die Kinder ins Internet, und Lernstände bleiben auf dem Gerät, bis du sie als QR-Code bei dir einliest.</p></div></div>' +
-    '<div class="formkarten">' +
-      '<form class="formkarte" data-form="anmelden"><h2>Anmelden</h2>' +
-        '<div><label class="lbl" for="lp">Pseudonym</label><input class="inp" id="lp" name="p" autocomplete="username" required></div>' +
-        '<div><label class="lbl" for="lpw">Passwort</label><input class="inp" id="lpw" name="pw" type="password" autocomplete="current-password" required></div>' +
-        (!neu && S.fehler ? '<p class="fehler" role="alert">' + esc(S.fehler) + '</p>' : '') +
-        '<div><button class="btn dunkel" type="submit">Ins Lehrpersonenzimmer ' + I.pfeil + '</button></div>' +
-        '<p class="klein matt">Passwort vergessen? Melde dich beim Admin. Er setzt es zurück.</p></form>' +
-      '<form class="formkarte neu" data-form="registrieren"><h2>Neu hier?</h2>' +
-        '<div><label class="lbl" for="rc">Einladungscode</label><input class="inp" id="rc" name="code" placeholder="LP-XXXX-XX" autocomplete="off" required></div>' +
-        '<div><label class="lbl" for="rp">Pseudonym wählen</label><input class="inp" id="rp" name="p" placeholder="z. B. Sonnenblume42" autocomplete="username" pattern="[A-Za-z0-9_\\-]{3,30}" required>' +
-        '<p class="klein matt" style="margin-top:4px">3 bis 30 Zeichen: Buchstaben ohne Umlaute, Ziffern, - und _. Kein echter Name.</p></div>' +
-        '<div><label class="lbl" for="rpw">Passwort (mind. 10 Zeichen)</label><input class="inp" id="rpw" name="pw" type="password" minlength="10" autocomplete="new-password" required></div>' +
-        (neu && S.fehler ? '<p class="fehler" role="alert">' + esc(S.fehler) + '</p>' : '') +
-        '<div><button class="btn" type="submit">Konto anlegen</button></div>' +
-        '<p class="klein matt">Wir speichern keinen Namen und keine E-Mail-Adresse. Den Einladungscode bekommst du vom Admin.</p></form>' +
-    '</div>' +
-    '<div class="reihe"><a class="btn" href="lernstand.html">' + I.scan + 'Nur Lernstand einlesen (ohne Anmeldung)</a>' +
-    '<a class="btn" href="' + APP_BASIS + '" target="_blank" rel="noopener">Pausenplatz der Kinder ansehen</a></div>' +
-    '<section class="galerie-block" aria-labelledby="galT"><h2 id="galT">So sehen die Apps aus</h2>' +
-    '<p class="matt">Eine Auswahl aus dem Katalog. Jede App läuft auf dem Tablet im Browser.</p><div class="galerie">' +
-    BEISPIELE.map(function(x){
-      return '<figure><a href="' + APP_BASIS + 'apps/' + x[0] + '.html" target="_blank" rel="noopener"><img src="bilder/' + x[0] + '.jpg" width="1024" height="768" loading="lazy" alt="Startseite der App ' + esc(x[1]) + '"></a>' +
-        '<figcaption><b>' + esc(x[1]) + '</b><span>' + esc(x[2]) + '</span><span class="stufe">' + esc(x[3]) + '</span></figcaption></figure>';
-    }).join('') + '</div></section>' +
-    '<section class="qr-erklaerung" aria-labelledby="qrT"><h2 id="qrT">So funktionieren die QR-Codes</h2>' +
-    '<p class="matt">Es gibt zwei Arten von QR-Codes: Einer bringt das Board auf die Tablets, der andere bringt den Lernstand eines Kindes zu dir.</p>' +
-    '<div class="qr-raster">' +
-      '<div class="qr-karte"><p class="chalk" style="font-size:26px">Von dir zum Kind</p><h3>Board auf die Tablets bringen</h3><ol>' +
-        '<li>Unter «Meine Boards» ein Board anlegen und Apps aus dem Katalog hineinlegen.</li>' +
-        '<li>Auf «QR &amp; Link teilen» tippen. Der QR-Code erscheint auf dem Bildschirm, auf Wunsch auch als Plakat zum Ausdrucken.</li>' +
-        '<li>Die Kinder scannen den Code mit der Kamera des Tablets. Ihr Board öffnet sich, und das Tablet merkt es sich.</li>' +
-        '<li>Änderst du das Board später, erscheinen die neuen Apps auf den Tablets von selbst. Neu scannen ist nicht nötig.</li></ol></div>' +
-      '<div class="qr-karte"><p class="chalk" style="font-size:26px">Vom Kind zu dir</p><h3>Lernstand einlesen</h3><ol>' +
-        '<li>Das Kind tippt in der App auf der Startseite auf «Lernstand-Code». Auf seinem Tablet erscheint ein QR-Code mit dem Lernstand, ohne Namen.</li>' +
-        '<li>Du öffnest auf deinem Gerät «Lernstand einlesen» und tippst auf «Code scannen». Die Kamera liest den Code direkt vom Tablet des Kindes. Ohne Kamera geht auch ein Foto des Codes.</li>' +
-        '<li>Aus jedem Code entsteht ein Blatt mit dem Lernstand. Scanne mehrere Kinder nacheinander und drucke alle Blätter zusammen, als ganze oder halbe Seite.</li>' +
-        '<li>Namen von Hand auf das Blatt schreiben und ins Lernheft kleben.</li></ol>' +
-        '<p class="klein matt">Datenschutz: Die Kamera wird nur auf deinem Gerät ausgewertet. Nichts wird gespeichert oder gesendet, und die Blätter verschwinden, sobald du die Seite schliesst.</p>' +
-        '<div><a class="btn dunkel" href="lernstand.html">' + I.scan + 'Lernstand einlesen</a></div></div>' +
-    '</div></section>' +
-    '<p class="klein matt">Server in Zürich (Supabase, Region eu-central-2). Kinder brauchen kein Login.</p></div>';
-}
-var BEISPIELE = [
-  ['rechentrainer-1', 'Rechentrainer', 'Plus und Minus bis 20 mit dem 20er-Feld', '1. Klasse'],
-  ['anlaute', 'Anlaute', 'Anlaute hören, Buchstaben finden, der, die, das', '1. Klasse'],
-  ['einmaleins-heft', 'Einmaleins-Heft', 'Kleines und grosses 1×1, Rechnen bis 10 000', '2. bis 4. Klasse'],
-  ['tierbibliothek', 'Tierbibliothek', 'Wissen über heimische Wildtiere, mit Videos', '2. Klasse'],
-  ['blitzlesen', 'Blitzlicht', 'Die 100 häufigsten Wörter schnell erkennen', '1. und 2. Klasse'],
-  ['lesezug', 'Lesezug', 'Hören, Laute, Silben, Wörter, Sätze', '1. und 2. Klasse']
+/* Ersatz, falls der Katalog-Server nicht erreichbar ist */
+var ERSATZ = [
+  { slug:'rechentrainer', titel:'Rechentrainer', uebt:'Plus und Minus bis 20 mit dem 20er-Feld', url:'apps/rechentrainer-1.html', typ:'eigen', fach:'mathematik', klassen:[1], lesen_noetig:null, symbol:'+−' },
+  { slug:'anlaute', titel:'Anlaute', uebt:'Anlaute hören, Buchstaben finden, der, die, das', url:'apps/anlaute.html', typ:'eigen', fach:'deutsch', klassen:[1], lesen_noetig:false, symbol:'A·a' },
+  { slug:'einmaleins-heft', titel:'Einmaleins-Heft', uebt:'Kleines und grosses 1×1, Rechnen bis 10 000', url:'apps/einmaleins-heft.html', typ:'eigen', fach:'mathematik', klassen:[2,3,4], lesen_noetig:null, symbol:'1×1' },
+  { slug:'tierbibliothek', titel:'Tierbibliothek', uebt:'Wissen über heimische Wildtiere, mit Videos', url:'apps/tierbibliothek.html', typ:'eigen', fach:'nmg', klassen:[2], lesen_noetig:false, symbol:'Tier' },
+  { slug:'blitzlicht', titel:'Blitzlicht', uebt:'Blitzlesen: die 100 häufigsten Wörter schnell erkennen', url:'apps/blitzlesen.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:null, symbol:'Blitz' },
+  { slug:'lesezug', titel:'Lesezug', uebt:'Lesen lernen: hören, Laute, Silben, Wörter, Sätze, Blitzlesen', url:'apps/lesezug.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:false, symbol:'Zug' }
 ];
 
-function passwortHtml(){
-  var pflicht = S.ich && S.ich.muss_passwort_aendern;
-  return '<div class="willkommen" style="max-width:560px"><form class="formkarte" data-form="passwort">' +
-    '<h2>' + (pflicht ? 'Neues Passwort wählen' : 'Passwort ändern') + '</h2>' +
-    (pflicht ? '<p>Du hast dich mit einem Einmal-Passwort angemeldet. Wähle jetzt dein eigenes.</p>' : '') +
-    '<div><label class="lbl" for="np1">Neues Passwort (mind. 10 Zeichen)</label><input class="inp" id="np1" name="a" type="password" minlength="10" autocomplete="new-password" required></div>' +
-    '<div><label class="lbl" for="np2">Noch einmal</label><input class="inp" id="np2" name="b" type="password" minlength="10" autocomplete="new-password" required></div>' +
-    (S.fehler ? '<p class="fehler" role="alert">' + esc(S.fehler) + '</p>' : '') +
-    '<div class="reihe"><button class="btn dunkel" type="submit">Speichern</button>' +
-    (pflicht ? '' : '<button class="btn" type="button" data-act="gehe" data-v="katalog">Abbrechen</button>') + '</div></form></div>';
-}
+var S = { apps:[], fach:{}, kl:{}, ohneLesen:false, auswahl:[] };
 
-/* ---- Katalog ---- */
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function klText(kl){ kl = (kl || []).slice().sort(); return !kl.length ? '' : kl.length === 1 ? kl[0] + '. Klasse' : kl[0] + '. bis ' + kl[kl.length - 1] + '. Klasse'; }
+function appLink(a){ return a.typ === 'extern' ? a.url : new URL(a.url, APP_BASIS).href; }
+function bildVon(a){ var m = /^apps\/([a-z0-9-]+)\.html$/.exec(a.url || ''); return m && BILDER[m[1]] ? 'bilder/' + m[1] + '.jpg' : null; }
+function appBySlug(s){ for (var i = 0; i < S.apps.length; i++) if (S.apps[i].slug === s) return S.apps[i]; return null; }
+var tt = null;
+function toast(t){ var el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(tt); tt = setTimeout(function(){ el.hidden = true; }, 2400); }
+function merke(){ try { localStorage.setItem('eduapps.auswahl', JSON.stringify(S.auswahl)); } catch(e){} }
+function lies(){ try { var x = JSON.parse(localStorage.getItem('eduapps.auswahl')); return Array.isArray(x) ? x : []; } catch(e){ return []; } }
+
+/* ---------- Filter ---------- */
+function filterHtml(){
+  document.getElementById('fFach').innerHTML = Object.keys(FACH).map(function(k){
+    return '<button class="chip fach" style="--c:' + FACH[k].c + '" data-fach="' + k + '" aria-pressed="' + !!S.fach[k] + '">' + FACH[k].n + '</button>'; }).join('');
+  document.getElementById('fKlasse').innerHTML = [1,2,3,4,5,6].map(function(k){
+    return '<button class="chip" data-kl="' + k + '" aria-pressed="' + !!S.kl[k] + '">' + k + '. Klasse</button>'; }).join('');
+  document.getElementById('fLesen').setAttribute('aria-pressed', S.ohneLesen);
+}
 function gefiltert(){
-  var f = S.f, kl = Object.keys(f.kl).filter(function(k){ return f.kl[k]; }).map(Number);
-  var fa = Object.keys(f.fach).filter(function(k){ return f.fach[k]; });
-  var q = f.q.trim().toLowerCase();
+  var fa = Object.keys(S.fach).filter(function(k){ return S.fach[k]; });
+  var kl = Object.keys(S.kl).filter(function(k){ return S.kl[k]; }).map(Number);
   return S.apps.filter(function(a){
-    if (!a.aktiv) return false;
-    if (kl.length && !a.klassen.some(function(k){ return kl.indexOf(k) >= 0; })) return false;
     if (fa.length && fa.indexOf(a.fach) < 0) return false;
-    if (q && a.titel.toLowerCase().indexOf(q) < 0 && (a.uebt || '').toLowerCase().indexOf(q) < 0 && !(a.lp21 || []).some(function(c){ return c.toLowerCase().indexOf(q) >= 0; })) return false;
-    if (f.dauer) { var m = a.dauer_min; if (m == null) return false; if (f.dauer === 'kurz' && m > 10) return false; if (f.dauer === 'mittel' && (m <= 10 || m > 20)) return false; if (f.dauer === 'lang' && m <= 20) return false; }
-    if (f.ohneLesen && a.lesen_noetig !== false) return false;
-    if (f.nurFav && !S.favs[a.id]) return false;
+    if (kl.length && !(a.klassen || []).some(function(k){ return kl.indexOf(k) >= 0; })) return false;
+    if (S.ohneLesen && a.lesen_noetig !== false) return false;
     return true;
   });
 }
-function katalogHtml(){
-  var f = S.f;
-  var kl = [1,2,3,4,5,6].map(function(k){ return '<button class="chip" data-act="fKl" data-k="' + k + '" aria-pressed="' + !!f.kl[k] + '">' + k + '.</button>'; }).join('');
-  var fa = Object.keys(FACH).map(function(k){ return '<button class="chip fach" style="--c:' + FACH[k].c + '" data-act="fFach" data-k="' + k + '" aria-pressed="' + !!f.fach[k] + '">' + FACH[k].n + '</button>'; }).join('');
-  var da = [['kurz','bis 10 Min.'],['mittel','15–20 Min.'],['lang','25+ Min.']].map(function(d){ return '<button class="chip" data-act="fDauer" data-k="' + d[0] + '" aria-pressed="' + (f.dauer === d[0]) + '">' + d[1] + '</button>'; }).join('');
-  var b = aktivesBoard();
-  return '<div class="zweispaltig"><aside class="seite-links" aria-label="Filter">' +
-    '<div><label class="lbl" for="such">Suche (Titel, Inhalt oder LP21-Code)</label><input class="inp" id="such" data-input="suche" value="' + esc(f.q) + '" placeholder="z. B. MA.1.A"></div>' +
-    '<div><p class="lbl">Klasse</p><div class="reihe">' + kl + '</div></div>' +
-    '<div><p class="lbl">Fachbereich</p><div class="reihe">' + fa + '</div></div>' +
-    '<div><p class="lbl">Dauer</p><div class="reihe">' + da + '</div></div>' +
-    '<div class="feldgruppe" style="gap:8px">' +
-      '<button class="chip" style="border-radius:12px;text-align:left" data-act="fLesen" aria-pressed="' + f.ohneLesen + '">Ohne Lesen spielbar</button>' +
-      '<button class="chip" style="border-radius:12px;text-align:left" data-act="fFav" aria-pressed="' + f.nurFav + '">Nur meine Favoriten</button>' +
-      '<button class="btn" style="border:none;background:none;text-decoration:underline;color:var(--rosa-tief);justify-content:flex-start;padding:0" data-act="fReset">Filter zurücksetzen</button></div>' +
-    '</aside><section class="inhalt"><div class="kopfzeile"><div><h1>App-Katalog</h1><p class="matt" id="treffer"></p></div>' +
-    (S.boards.length ? '<div style="min-width:260px"><label class="lbl" for="ziel">Hinzufügen zu Board</label><select class="inp" id="ziel" data-input="ziel">' +
-      S.boards.map(function(x){ return '<option value="' + x.id + '"' + (b && x.id === b.id ? ' selected' : '') + '>' + esc(x.name) + '</option>'; }).join('') + '</select></div>'
-      : '<button class="btn dunkel" data-act="neuesBoard">' + I.plus + 'Erstes Board anlegen</button>') +
-    '</div><div id="kliste"></div></section></div>';
-}
-function katalogListe(){
-  var el = document.getElementById('kliste'); if (!el) return;
-  var liste = gefiltert(), b = aktivesBoard();
-  var t = document.getElementById('treffer');
-  if (t) t.textContent = liste.length + ' von ' + S.apps.filter(function(a){ return a.aktiv; }).length + ' Apps · ' + Object.keys(S.favs).length + ' Favoriten';
-  if (!liste.length) { el.innerHTML = '<div class="leer"><h2>Keine App passt zu diesen Filtern</h2><p class="matt">Nimm einen Filter weg oder wünsch dir eine neue App unter «Rückmeldung».</p></div>'; return; }
-  el.innerHTML = '<div class="karten">' + liste.map(function(a){
-    var fav = !!S.favs[a.id], drin = b && b.apps.indexOf(a.id) >= 0, fc = FACH[a.fach];
-    return '<article class="appkarte" style="--c:' + fc.c + '"><div class="bild"><span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span>' +
-      '<button class="ibtn stern" data-act="fav" data-id="' + a.id + '" aria-pressed="' + fav + '" aria-label="' + (fav ? 'Aus Favoriten entfernen' : 'Als Favorit merken') + '">' + I.stern(fav) + '</button>' +
-      (a.typ === 'extern' ? '<span class="extern">Externer Link</span>' : '') + '</div>' +
-      '<div class="text"><h3>' + esc(a.titel) + '</h3><p class="klein matt">' + esc(a.uebt || '') + '</p>' +
-      '<div class="marken"><span class="f">' + fc.n + '</span><span>' + klText(a.klassen) + '</span>' +
-      (a.lp21 || []).map(function(c){ return '<span>' + esc(c) + '</span>'; }).join('') +
-      (a.dauer_min ? '<span>' + a.dauer_min + ' Min.</span>' : '') + '</div>' +
-      '<div class="aktionen">' + (b ? '<button class="btn ' + (drin ? 'drin' : 'dunkel') + '" data-act="insBoard" data-id="' + a.id + '">' + (drin ? 'Im Board ✓' : '+ Ins Board') + '</button>' : '') +
-      '<a class="ibtn" href="' + esc(appLink(a)) + '" target="_blank" rel="noopener noreferrer" aria-label="App ansehen">' + I.auge + '</a>' +
-      '<button class="ibtn" data-act="melden" data-id="' + a.id + '" aria-label="Fehler melden oder Kommentar">' + I.blase + '</button></div></div></article>';
-  }).join('') + '</div>';
-}
 
-/* ---- Boards ---- */
-function boardsHtml(){
-  var b = aktivesBoard();
-  var links = '<aside class="seite-links"><h2 class="chalk" style="font-size:30px">Meine Boards</h2><div class="feldgruppe" style="gap:12px">' +
-    S.boards.map(function(x){
-      var meta = x.apps.length + ' Apps' + (x.team.length ? ' · mit ' + x.team.map(function(t){ return t.name; }).join(', ') : '') + (x.fokus_app_id ? ' · Fokus an' : '');
-      return '<button class="boardknopf" data-act="waehle" data-id="' + x.id + '" aria-current="' + (b && x.id === b.id) + '"><b>' + esc(x.name) + '</b><span class="klein">' + esc(meta) + '</span></button>';
-    }).join('') + '<button class="btn" style="border-style:dashed" data-act="neuesBoard">' + I.plus + 'Neues Board</button></div>' +
-    '<p class="klein matt">Board-Namen bitte ohne Kindernamen, z. B. «3b Igel».</p></aside>';
-  if (!b) return '<div class="zweispaltig">' + links + '<section class="inhalt"><div class="leer"><h2>Noch kein Board</h2><p class="matt">Ein Board ist der Wochenplan deiner Klasse. Leg eines an und füll es mit Apps aus dem Katalog.</p><div><button class="btn dunkel" data-act="neuesBoard">' + I.plus + 'Board anlegen</button></div></div></section></div>';
-  var besitzer = b.besitzer_id === S.session.uid;
-  var fokus = b.fokus_app_id && appById(b.fokus_app_id);
-  var kacheln = b.apps.map(function(id, i){
-    var a = appById(id); if (!a) return '';
-    var f = b.fokus_app_id === id;
-    return '<div class="kachel' + (f ? ' fokussiert' : (b.fokus_app_id ? ' aus' : '')) + '"><div class="bild" style="--c:' + FACH[a.fach].c + '"><span class="nr">' + (i + 1) + '</span><span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span></div>' +
-      '<b>' + esc(a.titel) + '</b><div class="reihe" style="gap:6px">' +
-      '<button class="ibtn" data-act="schieben" data-i="' + i + '" data-d="-1" aria-label="Nach vorne"' + (i === 0 ? ' disabled' : '') + '>' + I.links + '</button>' +
-      '<button class="ibtn" data-act="schieben" data-i="' + i + '" data-d="1" aria-label="Nach hinten"' + (i === b.apps.length - 1 ? ' disabled' : '') + '>' + I.rechts + '</button>' +
-      '<button class="ibtn" data-act="fokus" data-id="' + id + '" aria-pressed="' + f + '" aria-label="' + (f ? 'Fokus beenden' : 'Fokus auf diese App') + '">' + I.fokus + '</button>' +
-      '<button class="ibtn" data-act="entfernen" data-id="' + id + '" aria-label="Aus Board entfernen">' + I.x + '</button></div></div>';
+/* ---------- Liste ---------- */
+function liste(){
+  var l = gefiltert(), el = document.getElementById('liste');
+  document.getElementById('treffer').textContent = l.length === S.apps.length ? S.apps.length + ' Apps' : l.length + ' von ' + S.apps.length + ' Apps passen';
+  if (!l.length) { el.innerHTML = '<div class="leer"><h3>Keine App passt zu diesen Filtern</h3><p class="matt">Nimm einen Filter weg. Es kommen laufend neue Apps dazu.</p></div>'; return; }
+  el.innerHTML = l.map(function(a){
+    var f = FACH[a.fach] || FACH.deutsch, bild = bildVon(a), gew = S.auswahl.indexOf(a.slug) >= 0;
+    return '<article class="app' + (gew ? ' gewaehlt' : '') + '" style="--c:' + f.c + '">' +
+      '<a class="bild" href="' + esc(appLink(a)) + '" target="_blank" rel="noopener" aria-label="' + esc(a.titel) + ' ansehen">' +
+        (bild ? '<img src="' + bild + '" width="1024" height="768" loading="lazy" alt="Startseite der App ' + esc(a.titel) + '">' : '<span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span>') +
+        (a.typ === 'extern' ? '<span class="extern">Externer Link</span>' : '') + '</a>' +
+      '<div class="text"><h3>' + esc(a.titel) + '</h3><p class="matt">' + esc(a.uebt || '') + '</p>' +
+      '<div class="marken"><span class="f">' + f.n + '</span><span>' + klText(a.klassen) + '</span>' + (a.lesen_noetig === false ? '<span>ohne Lesen</span>' : '') + '</div>' +
+      '<div class="aktionen"><a class="btn" href="' + esc(appLink(a)) + '" target="_blank" rel="noopener">Ansehen</a>' +
+      '<button class="btn" data-waehle="' + esc(a.slug) + '" aria-pressed="' + gew + '">' + (gew ? 'Für meine Klasse ✓' : '+ Für meine Klasse') + '</button></div></div></article>';
   }).join('');
-  return '<div class="zweispaltig">' + links + '<section class="inhalt">' +
-    '<div class="kopfzeile"><div><p class="klein matt" style="font-weight:700;letter-spacing:.06em;text-transform:uppercase">Wochenplan</p><h1>' + esc(b.name) + '</h1>' +
-    '<p class="matt">' + b.apps.length + ' Apps · Board-Code ' + esc(b.code) + (b.team.length ? ' · gemeinsam mit ' + esc(b.team.map(function(t){ return t.name; }).join(', ')) : '') + '</p></div>' +
-    '<div class="reihe"><button class="btn" data-act="gehe" data-v="kind">' + I.auge + 'Vorschau als Kind</button>' +
-    '<button class="btn dunkel" data-act="teilen">' + I.qr + 'QR &amp; Link teilen</button>' +
-    '<button class="btn" data-act="duplizieren">' + I.kopie + 'Duplizieren</button></div></div>' +
-    (fokus ? '<div class="fokusband" role="status"><span><b>Fokus-Modus aktiv.</b> Alle Geräte der Klasse zeigen nur «' + esc(fokus.titel) + '».</span><button class="btn" style="background:#fff;border-color:#fff;color:var(--rosa-tief)" data-act="fokusAus">Fokus beenden</button></div>'
-      : '<p class="tipp">Tipp: Mit <b>Fokus</b> auf einer App sehen alle Kindergeräte nach wenigen Sekunden nur noch diese eine App.</p>') +
-    (b.apps.length ? '' : '<div class="leer"><h2>Dieses Board ist noch leer</h2><p class="matt">Such im Katalog passende Apps und leg sie mit «Ins Board» hierhin.</p></div>') +
-    '<div class="kacheln">' + kacheln + '<button class="plus" data-act="gehe" data-v="katalog">+ App aus Katalog</button></div>' +
-    '<div class="team"><div style="flex:1 1 260px"><h2 style="font-size:22px">Gemeinsam bearbeiten</h2>' +
-      '<p class="klein matt" style="margin:4px 0 10px">Teamteaching, IF oder Stellvertretung: Eine zweite Lehrperson bekommt Zugriff auf dieses Board.</p><div class="reihe">' +
-      (b.team.length ? b.team.map(function(t){ return '<span class="person">' + esc(t.name) + (besitzer ? '<button class="ibtn" data-act="teamWeg" data-id="' + t.id + '" aria-label="Zugriff entfernen">' + I.x + '</button>' : '') + '</span>'; }).join('') : '<span class="matt">Noch niemand.</span>') +
-      '</div></div>' +
-      (besitzer ? '<form class="reihe" style="flex:1 1 300px;align-items:flex-end;flex-wrap:nowrap" data-form="team"><div style="flex:1"><label class="lbl" for="tp">Pseudonym der Lehrperson</label><input class="inp" id="tp" name="p" required></div><button class="btn" type="submit">Einladen</button></form>'
-        : '<p class="klein matt">Mitglieder einladen kann die Lehrperson, die das Board angelegt hat.</p>') +
-    '</div>' +
-    '<div class="einstellungen"><form class="reihe" style="align-items:flex-end;flex-wrap:nowrap;flex:1 1 320px" data-form="umbenennen"><div style="flex:1"><label class="lbl" for="bn">Board-Name</label><input class="inp" id="bn" name="n" maxlength="60" value="' + esc(b.name) + '" required></div><button class="btn" type="submit">Umbenennen</button></form>' +
-    (besitzer ? (S.loeschenFrage ? '<div class="reihe"><button class="btn rot voll" data-act="loeschenJa">Wirklich löschen</button><button class="btn" data-act="loeschenNein">Abbrechen</button></div>' : '<button class="btn rot" data-act="loeschen">Board löschen</button>') : '') +
-    '</div></section></div>';
 }
-function qrSvg(text, gross){
-  var q = qrcode(0, 'M'); q.addData(text); q.make();
-  return q.createSvgTag({ cellSize:gross ? 8 : 6, margin:2, scalable:true });
+function leiste(){
+  var n = S.auswahl.length, el = document.getElementById('leiste');
+  el.hidden = !n;
+  document.getElementById('leisteText').textContent = n === 1 ? '1 App für deine Klasse gewählt' : n + ' Apps für deine Klasse gewählt';
 }
-function teilenHtml(){
-  var b = aktivesBoard(); if (!b) return '';
-  var link = boardLink(b);
-  return '<div class="schleier" data-act="teilenZu" data-hinter="1"><div class="dialog" role="dialog" aria-modal="true" aria-label="Board teilen">' +
-    '<div class="qr" role="img" aria-label="QR-Code zum Board">' + qrSvg(link) + '</div>' +
-    '<div class="feldgruppe" style="flex:1 1 280px;gap:12px"><p class="chalk" style="font-size:28px">Auf neue Geräte bringen</p><h2 style="font-size:30px">' + esc(b.name) + '</h2>' +
-    '<p class="matt">Das Kind scannt den Code mit dem Tablet. Das Gerät merkt sich nur den Board-Code, sonst nichts.</p>' +
+
+/* ---------- QR ---------- */
+function klassenLink(){ return new URL('klasse.html#a=' + S.auswahl.join(','), location.href).href; }
+function qrSvg(text){ var q = qrcode(0, 'M'); q.addData(text); q.make(); return q.createSvgTag({ cellSize:6, margin:2, scalable:true }); }
+function titelListe(){ return S.auswahl.map(appBySlug).filter(Boolean).map(function(a){ return '<li>' + esc(a.titel) + '</li>'; }).join(''); }
+function dialogAuf(){
+  var link = klassenLink();
+  document.getElementById('dialog').innerHTML =
+    '<div class="schleier" id="schleier"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="qrT">' +
+    '<div class="qr" role="img" aria-label="QR-Code für die Tablets">' + qrSvg(link) + '</div>' +
+    '<div class="rechts"><p class="chalk" style="font-size:28px">Auf die Tablets bringen</p><h2 id="qrT" style="font-size:28px">Eure Apps</h2>' +
+    '<ul class="auswahl-liste">' + titelListe() + '</ul>' +
+    '<p class="matt">Die Kinder scannen den Code mit der Kamera des Tablets. Das Tablet merkt sich die Auswahl. Gespeichert wird sonst nichts, auch nicht auf dem Server.</p>' +
     '<div class="link">' + esc(link) + '</div>' +
-    '<p class="matt">Oder auf der Seite «Unsere Klasse» den Code eintippen: <b class="code">' + esc(b.code) + '</b></p>' +
-    '<div class="reihe"><button class="btn" data-act="kopieren">Link kopieren</button><button class="btn" data-act="plakat">QR-Plakat drucken</button><button class="btn rot" data-act="neuerCode">Code erneuern</button></div>' +
-    '<p class="klein matt">«Code erneuern» macht den alten Link sofort ungültig, etwa wenn er weitergegeben wurde. Die Geräte der Klasse scannen dann den neuen Code.</p>' +
-    '<div style="text-align:right"><button class="btn dunkel" data-act="teilenZu">Fertig</button></div></div></div></div>';
+    '<div class="reihe"><button class="btn" id="kopieren">Link kopieren</button><button class="btn" id="drucken">QR-Plakat drucken</button><a class="btn" href="' + esc(link) + '" target="_blank" rel="noopener">So sieht es das Kind</a></div>' +
+    '<div style="text-align:right"><button class="btn dunkel" id="zu">Fertig</button></div></div></div></div>';
+  document.getElementById('zu').focus();
 }
+function dialogZu(){ document.getElementById('dialog').innerHTML = ''; }
 
-/* ---- Vorschau als Kind ---- */
-function kindHtml(){
-  var b = aktivesBoard();
-  if (!b) { S.view = 'boards'; return boardsHtml(); }
-  var apps = b.apps.map(appById).filter(Boolean);
-  var fokus = b.fokus_app_id && appById(b.fokus_app_id);
-  var feld = function(a){ return '<div class="kfeld" style="--c:' + FACH[a.fach].c + '"><span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span><b>' + esc(a.titel) + '</b></div>'; };
-  return '<div class="feldgruppe" style="gap:20px"><div class="kopfzeile" style="max-width:1040px;width:100%;margin:0 auto"><div><p class="klein matt" style="font-weight:700;letter-spacing:.06em;text-transform:uppercase">Vorschau: So sieht es das Kind</p><h1>' + esc(b.name) + '</h1></div>' +
-    '<div class="reihe"><a class="btn" href="' + esc(boardLink(b)) + '" target="_blank" rel="noopener">Echte Seite öffnen</a><button class="btn" data-act="gehe" data-v="boards">' + I.zurueck + 'Zurück zum Board</button></div></div>' +
-    '<div class="tablet"><div><p class="chalk" style="font-size:32px;transform:rotate(-3deg);width:max-content">Pausenplatz</p>' +
-    '<p style="font-family:var(--font-display);font-weight:900;font-size:42px;line-height:1.05">' + esc(b.name) + '</p>' +
-    '<p class="matt" style="font-size:19px">' + (fokus ? 'Jetzt machen alle das Gleiche.' : 'Spring auf ein Feld.') + '</p></div>' +
-    (fokus ? '<div class="kfokus">' + feld(fokus) + '</div>' : apps.length ? '<div class="kfelder">' + apps.map(feld).join('') + '</div>' : '<div class="leer"><h2>Hier ist noch nichts</h2></div>') +
-    '<p class="klein matt" style="margin-top:auto;text-align:center">Kein Login · keine Namen · nur die Apps dieses Boards</p></div></div>';
-}
-
-/* ---- Rückmeldung ---- */
-function meldungHtml(){
-  var fehler = S.fb.art === 'fehler';
-  var eigene = S.meldungen;
-  return '<div class="zweispaltig" style="max-width:1200px"><form class="formkarte" style="flex:1 1 360px" data-form="meldung"><h1>Rückmeldung</h1>' +
-    '<div class="reihe"><button type="button" class="chip" data-act="fbArt" data-k="fehler" aria-pressed="' + fehler + '">Fehler melden</button><button type="button" class="chip" data-act="fbArt" data-k="wunsch" aria-pressed="' + !fehler + '">App wünschen</button></div>' +
-    (fehler ? '<div><label class="lbl" for="fba">Welche App?</label><select class="inp" id="fba" name="app">' + S.apps.map(function(a){ return '<option value="' + a.id + '"' + (a.id === S.fb.app ? ' selected' : '') + '>' + esc(a.titel) + '</option>'; }).join('') + '</select></div>' : '') +
-    '<div><label class="lbl" for="fbt">' + (fehler ? 'Was funktioniert nicht?' : 'Welche App wünschst du dir?') + '</label><textarea class="inp" id="fbt" name="text" rows="5" required minlength="3" maxlength="2000" placeholder="' + (fehler ? 'z. B. Auf dem iPad bleibt der Ton stumm.' : 'z. B. Silbenbögen zeichnen für die 1. Klasse') + '"></textarea></div>' +
-    '<p class="fehler">Bitte keine Namen von Kindern eintragen.</p><div><button class="btn dunkel" type="submit">Senden</button></div></form>' +
-    '<section class="inhalt" style="flex:1 1 360px"><h2 class="chalk" style="font-size:30px">' + (istKatalogAdmin() ? 'Alle Rückmeldungen' : 'Meine Rückmeldungen') + '</h2><div class="liste">' +
-    (eigene.length ? eigene.map(meldungEintrag).join('') : '<p class="matt">Noch keine Rückmeldungen.</p>') + '</div></section></div>';
-}
-function meldungEintrag(m, mitKnopf){
-  var app = m.app_id && appById(m.app_id);
-  return '<div class="eintrag ' + (m.art === 'fehler' ? 'fehlerart' : 'wunschart') + (m.erledigt ? ' erledigt' : '') + '"><div class="oben"><span>' + (m.art === 'fehler' ? 'Fehler' : 'Wunsch') + (app ? ' · ' + esc(app.titel) : '') + '</span><span>' + (m.erledigt ? 'erledigt' : 'offen') + '</span></div>' +
-    '<p>' + esc(m.text) + '</p><p class="klein matt">von ' + esc((m.profile && m.profile.pseudonym) || '—') + ' · ' + new Date(m.erstellt_am).toLocaleDateString('de-CH') + '</p>' +
-    (mitKnopf === true ? '<div><button class="btn" data-act="erledigt" data-id="' + m.id + '">' + (m.erledigt ? 'Wieder öffnen' : 'Als erledigt markieren') + '</button></div>' : '') + '</div>';
-}
-function ladeMeldungen(){ return rest('rueckmeldung?select=*,profile(pseudonym)&order=erstellt_am.desc').then(function(r){ S.meldungen = r || []; }); }
-
-/* ---- Verwaltung ---- */
-function verwaltungTabs(){ return istAdmin() ? [['einladungen','Einladungen'],['lehrpersonen','Lehrpersonen'],['apps','App-Katalog'],['meldungen','Meldungen']] : [['apps','App-Katalog'],['meldungen','Meldungen']]; }
-function verwaltungHtml(){
-  var tabs = verwaltungTabs();
-  if (!tabs.some(function(t){ return t[0] === S.vTab; })) S.vTab = tabs[0][0];
-  var kopf = '<div class="kopfzeile"><div><p class="chalk" style="font-size:28px">Nur für Admin und Sub-Admins</p><h1>Verwaltung</h1></div><div class="reihe" role="tablist">' +
-    tabs.map(function(t){ return '<button class="chip" role="tab" aria-selected="' + (S.vTab === t[0]) + '" aria-pressed="' + (S.vTab === t[0]) + '" data-act="vTab" data-k="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</div></div>';
-  var inhalt = { einladungen:einladungenHtml, lehrpersonen:lehrpersonenHtml, apps:appsVerwaltungHtml, meldungen:meldungenVerwaltungHtml }[S.vTab]();
-  return '<div class="feldgruppe" style="gap:24px">' + kopf + inhalt + '</div>';
-}
-function einladungenHtml(){
-  return '<div class="zweispaltig"><form class="formkarte" style="flex:1 1 320px;background:var(--gelb);border-color:var(--gelb)" data-form="einladung"><h2>Neue Lehrperson einladen</h2>' +
-    '<p>1. Die Lehrperson schreibt dir eine Mail. 2. Du erzeugst hier einen Code und schickst ihn zurück. 3. Sie wählt selbst Pseudonym und Passwort. Auf dem Server bleibt keine Adresse.</p>' +
-    '<div><label class="lbl" for="er">Rolle</label><select class="inp" id="er" name="rolle"><option value="lehrperson">Lehrperson</option><option value="subadmin">Sub-Admin (darf Katalog pflegen)</option></select></div>' +
-    '<div><button class="btn dunkel" type="submit">Einladungscode erzeugen</button></div><p class="klein">Gültig 14 Tage, nur einmal verwendbar.</p></form>' +
-    '<section class="inhalt" style="flex:2 1 420px"><div class="liste">' +
-    (S.einladungen.length ? S.einladungen.map(function(e){
-      var status = e.eingeloest_am ? 'eingelöst' + (e.profile ? ' · ' + esc(e.profile.pseudonym) : '') : (new Date(e.gueltig_bis) < new Date() ? 'abgelaufen' : 'offen bis ' + new Date(e.gueltig_bis).toLocaleDateString('de-CH'));
-      return '<div class="eintrag" style="flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center"><span class="code">' + esc(e.code) + '</span><span>' + ROLLE[e.rolle] + '</span><span class="klein matt">' + status + '</span>' +
-        (e.eingeloest_am ? '' : '<button class="btn rot" data-act="einladungWeg" data-id="' + esc(e.code) + '">Zurückziehen</button>') + '</div>';
-    }).join('') : '<p class="matt">Noch keine Einladungen.</p>') + '</div></section></div>';
-}
-function lehrpersonenHtml(){
-  return '<div class="tabelle"><table><thead><tr><th>Pseudonym</th><th>Rolle</th><th>Seit</th><th>Aktionen</th></tr></thead><tbody>' +
-    S.lps.map(function(l){
-      var ich = l.id === S.session.uid;
-      return '<tr><td><b>' + esc(l.pseudonym) + '</b>' + (ich ? ' (du)' : '') + '</td><td><span class="rolle" style="background:' + ROLLE_FARBE[l.rolle] + '">' + ROLLE[l.rolle] + '</span></td>' +
-        '<td>' + new Date(l.erstellt_am).toLocaleDateString('de-CH') + '</td><td><div class="reihe">' +
-        (ich ? '' : '<button class="btn" data-act="pwReset" data-p="' + esc(l.pseudonym) + '">Passwort zurücksetzen</button>' +
-          (l.rolle !== 'admin' ? '<button class="btn" data-act="rolle" data-id="' + l.id + '" data-r="' + (l.rolle === 'subadmin' ? 'lehrperson' : 'subadmin') + '">' + (l.rolle === 'subadmin' ? 'Zur Lehrperson machen' : 'Zum Sub-Admin machen') + '</button>' : '')) +
-        (S.pwInfo && S.pwInfo.pseudonym === l.pseudonym ? '<span class="pw">Einmal-Passwort: <b class="code">' + esc(S.pwInfo.pw) + '</b></span>' : '') +
-        '</div></td></tr>';
-    }).join('') + '</tbody></table></div>' +
-    '<p class="klein matt">Sub-Admins dürfen Apps und externe Links in den Katalog aufnehmen. Lehrpersonen verwalten nur ihre eigenen Boards. Ein Einmal-Passwort muss beim nächsten Anmelden geändert werden.</p>';
-}
-function appsVerwaltungHtml(){
-  var a = S.appForm || { typ:'eigen', fach:'deutsch', klassen:[], lp21:[], aktiv:true, auf_pausenplatz:false, datenschutz_geprueft:false };
-  var neu = !a.id;
-  var sel = function(v, w){ return v === w ? ' selected' : ''; };
-  return '<div class="zweispaltig"><form class="formkarte raster2" style="flex:1 1 400px" data-form="app">' +
-    '<h2 class="ganz">' + (neu ? 'App oder Link aufnehmen' : 'App bearbeiten') + '</h2>' +
-    '<div class="ganz"><label class="lbl" for="at">Titel</label><input class="inp" id="at" name="titel" required value="' + esc(a.titel || '') + '"></div>' +
-    '<div class="ganz"><label class="lbl" for="au">Was wird geübt?</label><input class="inp" id="au" name="uebt" value="' + esc(a.uebt || '') + '"></div>' +
-    '<div class="ganz"><label class="lbl" for="al">Adresse</label><input class="inp" id="al" name="url" required placeholder="apps/neue-app.html oder https://…" value="' + esc(a.url || '') + '"><p class="klein matt" style="margin-top:4px">Eigene App: Pfad im Pausenplatz-Repo, z. B. apps/rechentrainer-2.html. Externer Link: volle https-Adresse.</p></div>' +
-    '<div><label class="lbl" for="ay">Art</label><select class="inp" id="ay" name="typ"><option value="eigen"' + sel(a.typ, 'eigen') + '>Eigene HTML-App</option><option value="extern"' + sel(a.typ, 'extern') + '>Externer Link</option></select></div>' +
-    '<div><label class="lbl" for="af">Fachbereich</label><select class="inp" id="af" name="fach">' + Object.keys(FACH).map(function(k){ return '<option value="' + k + '"' + sel(a.fach, k) + '>' + FACH[k].n + '</option>'; }).join('') + '</select></div>' +
-    '<div><label class="lbl" for="ap">LP21-Codes (mit Komma)</label><input class="inp" id="ap" name="lp21" placeholder="MA.1.A, MA.3.A" value="' + esc((a.lp21 || []).join(', ')) + '"></div>' +
-    '<div><label class="lbl" for="ad">Dauer (Min.)</label><input class="inp" id="ad" name="dauer" type="number" min="1" max="120" value="' + esc(a.dauer_min || '') + '"></div>' +
-    '<div><label class="lbl" for="as">Symbol (1–5 Zeichen)</label><input class="inp" id="as" name="symbol" maxlength="5" value="' + esc(a.symbol || '') + '"></div>' +
-    '<div><label class="lbl" for="ag">Kurzname (für die Adresse)</label><input class="inp" id="ag" name="slug" pattern="[a-z0-9\\-]{2,60}" placeholder="z. B. geld-zaehlen" required value="' + esc(a.slug || '') + '"' + (neu ? '' : ' readonly') + '></div>' +
-    '<fieldset class="ganz" style="border:none;padding:0;margin:0"><legend class="lbl">Klassen</legend><div class="reihe" style="gap:4px 14px">' +
-      [1,2,3,4,5,6].map(function(k){ return '<label class="haken"><input type="checkbox" name="kl" value="' + k + '"' + (a.klassen.indexOf(k) >= 0 ? ' checked' : '') + '>' + k + '.</label>'; }).join('') + '</div></fieldset>' +
-    '<label class="haken ganz"><input type="checkbox" name="ohneLesen"' + (a.lesen_noetig === false ? ' checked' : '') + '> Ohne Lesen spielbar</label>' +
-    '<label class="haken ganz"><input type="checkbox" name="pp"' + (a.auf_pausenplatz ? ' checked' : '') + '> Auch auf dem Pausenplatz zeigen (Hinweis: der Pausenplatz liest zurzeit noch apps.js)</label>' +
-    '<label class="haken ganz"><input type="checkbox" name="aktiv"' + (a.aktiv ? ' checked' : '') + '> Aktiv (im Katalog sichtbar)</label>' +
-    '<label class="haken ganz"><input type="checkbox" name="ds"' + (a.datenschutz_geprueft ? ' checked' : '') + ' required> Geprüft: Die App speichert und sendet keine Daten von Kindern</label>' +
-    '<div class="ganz reihe"><button class="btn dunkel" type="submit">' + (neu ? 'In den Katalog' : 'Speichern') + '</button>' + (neu ? '' : '<button class="btn" type="button" data-act="appNeu">Abbrechen</button>') + '</div></form>' +
-    '<section class="inhalt" style="flex:1 1 380px"><h2 class="chalk" style="font-size:28px">Im Katalog (' + S.apps.length + ')</h2><div class="liste">' +
-    S.apps.map(function(x){
-      return '<div class="eintrag" style="flex-direction:row;align-items:center;gap:12px' + (x.aktiv ? '' : ';opacity:.55') + '"><span class="mini" style="--c:' + FACH[x.fach].c + '" aria-hidden="true">' + esc(x.symbol || x.titel.charAt(0)) + '</span>' +
-        '<span style="flex:1;min-width:0"><b>' + esc(x.titel) + '</b><br><span class="klein matt">' + FACH[x.fach].n + ' · ' + klText(x.klassen) + ' · ' + esc((x.lp21 || []).join(', ')) + ' · ' + (x.typ === 'extern' ? 'externer Link' : 'eigene App') + (x.aktiv ? '' : ' · inaktiv') + '</span></span>' +
-        '<button class="btn" data-act="appBearbeiten" data-id="' + x.id + '">Bearbeiten</button></div>';
-    }).join('') + '</div></section></div>';
-}
-function meldungenVerwaltungHtml(){
-  return '<div class="karten">' + (S.meldungen.length ? S.meldungen.map(function(m){ return meldungEintrag(m, true); }).join('') : '<p class="matt">Keine Meldungen.</p>') + '</div>';
-}
-function ladeVerwaltung(){
-  var jobs = [ladeMeldungen(), ladeApps()];
-  if (istAdmin()) {
-    jobs.push(rest('einladung?select=*,profile!einladung_eingeloest_von_fkey(pseudonym)&order=erstellt_am.desc').then(function(r){ S.einladungen = r || []; }));
-    jobs.push(rest('profile?select=*&order=pseudonym').then(function(r){ S.lps = r || []; }));
-  }
-  return Promise.all(jobs);
-}
-
-/* ---------------- Aktionen ---------------- */
-function boardSpeichernReihenfolge(b){
-  var rows = b.apps.map(function(id, i){ return { board_id:b.id, app_id:id, position:i }; });
-  return rows.length ? rest('board_app?on_conflict=board_id,app_id', { method:'POST', body:rows, prefer:'resolution=merge-duplicates' }) : Promise.resolve();
-}
-function nachher(p, text){ return p.then(function(){ return ladeBoards(); }).then(function(){ render(); if (S.view === 'katalog') katalogListe(); if (text) toast(text); }).catch(fehlerToast); }
-
-var A = {
-  gehe:function(d){
-    S.view = d.v; S.teilen = false; S.loeschenFrage = false; S.fehler = '';
-    if (d.v === 'meldung' || d.v === 'verwaltung') {
-      document.getElementById('app').innerHTML = '<p class="laden">Einen Moment …</p>';
-      (d.v === 'verwaltung' ? ladeVerwaltung() : ladeMeldungen()).then(function(){ render(); }).catch(fehlerToast);
-    }
-    render(); if (S.view === 'katalog') katalogListe();
-    window.scrollTo(0, 0);
-  },
-  abmelden:function(){ abmelden(false); },
-  pwAendern:function(){ S.view = 'passwort'; S.fehler = ''; render(); },
-  loginTab:function(d){ S.loginTab = d.k; render(); },
-  fKl:function(d){ S.f.kl[d.k] = !S.f.kl[d.k]; render(); katalogListe(); },
-  fFach:function(d){ S.f.fach[d.k] = !S.f.fach[d.k]; render(); katalogListe(); },
-  fDauer:function(d){ S.f.dauer = S.f.dauer === d.k ? '' : d.k; render(); katalogListe(); },
-  fLesen:function(){ S.f.ohneLesen = !S.f.ohneLesen; render(); katalogListe(); },
-  fFav:function(){ S.f.nurFav = !S.f.nurFav; render(); katalogListe(); },
-  fReset:function(){ S.f = { kl:{}, fach:{}, dauer:'', q:'', ohneLesen:false, nurFav:false }; render(); katalogListe(); },
-  fav:function(d){
-    var an = !!S.favs[d.id];
-    if (an) delete S.favs[d.id]; else S.favs[d.id] = true;
-    katalogListe();
-    (an ? rest('favorit?lp_id=eq.' + S.session.uid + '&app_id=eq.' + d.id, { method:'DELETE' })
-        : rest('favorit', { method:'POST', body:{ lp_id:S.session.uid, app_id:d.id } })).catch(function(e){ fehlerToast(e); ladeFavs().then(katalogListe); });
-  },
-  insBoard:function(d){
-    var b = aktivesBoard(), a = appById(d.id); if (!b || !a) return;
-    if (b.apps.indexOf(d.id) >= 0) {
-      if (b.fokus_app_id === d.id) rest('board?id=eq.' + b.id, { method:'PATCH', body:{ fokus_app_id:null } });
-      nachher(rest('board_app?board_id=eq.' + b.id + '&app_id=eq.' + d.id, { method:'DELETE' }), '«' + a.titel + '» aus «' + b.name + '» entfernt');
-    } else {
-      nachher(rest('board_app', { method:'POST', body:{ board_id:b.id, app_id:d.id, position:b.apps.length } }), '«' + a.titel + '» liegt jetzt in «' + b.name + '»');
-    }
-  },
-  melden:function(d){ S.fb = { art:'fehler', app:d.id, text:'' }; A.gehe({ v:'meldung' }); },
-  waehle:function(d){ S.aktiv = d.id; S.loeschenFrage = false; render(); },
-  neuesBoard:function(){
-    rest('board', { method:'POST', body:{ name:'Neues Board', besitzer_id:S.session.uid }, prefer:'return=representation' })
-      .then(function(r){ S.aktiv = r[0].id; S.view = 'boards'; return ladeBoards(); })
-      .then(function(){ render(); toast('Neues Board angelegt. Gib ihm unten einen Namen.'); }).catch(fehlerToast);
-  },
-  schieben:function(d){
-    var b = aktivesBoard(), i = +d.i, j = i + (+d.d); if (!b || j < 0 || j >= b.apps.length) return;
-    var t = b.apps[i]; b.apps[i] = b.apps[j]; b.apps[j] = t; render();
-    boardSpeichernReihenfolge(b).catch(function(e){ fehlerToast(e); ladeBoards().then(render); });
-  },
-  fokus:function(d){
-    var b = aktivesBoard(), a = appById(d.id), aus = b.fokus_app_id === d.id;
-    nachher(rest('board?id=eq.' + b.id, { method:'PATCH', body:{ fokus_app_id:aus ? null : d.id } }),
-      aus ? 'Fokus beendet. Alle Apps sind wieder sichtbar.' : 'Fokus: Alle Geräte zeigen gleich nur «' + a.titel + '»');
-  },
-  fokusAus:function(){ var b = aktivesBoard(); nachher(rest('board?id=eq.' + b.id, { method:'PATCH', body:{ fokus_app_id:null } }), 'Fokus beendet.'); },
-  entfernen:function(d){
-    var b = aktivesBoard();
-    var p = b.fokus_app_id === d.id ? rest('board?id=eq.' + b.id, { method:'PATCH', body:{ fokus_app_id:null } }) : Promise.resolve();
-    nachher(p.then(function(){ return rest('board_app?board_id=eq.' + b.id + '&app_id=eq.' + d.id, { method:'DELETE' }); }));
-  },
-  duplizieren:function(){
-    var b = aktivesBoard();
-    rpc('board_duplizieren', { p_board:b.id }).then(function(id){ S.aktiv = id; return ladeBoards(); })
-      .then(function(){ render(); toast('Kopie angelegt, mit eigenem QR-Code.'); }).catch(fehlerToast);
-  },
-  teamWeg:function(d){ var b = aktivesBoard(); nachher(rest('board_mitglied?board_id=eq.' + b.id + '&lp_id=eq.' + d.id, { method:'DELETE' }), 'Zugriff entfernt.'); },
-  loeschen:function(){ S.loeschenFrage = true; render(); },
-  loeschenNein:function(){ S.loeschenFrage = false; render(); },
-  loeschenJa:function(){ var b = aktivesBoard(); S.loeschenFrage = false; S.aktiv = null; nachher(rest('board?id=eq.' + b.id, { method:'DELETE' }), 'Board gelöscht.'); },
-  teilen:function(){ S.teilen = true; render(); },
-  teilenZu:function(d, e){ if (d.hinter && e.target !== e.currentTarget) return; S.teilen = false; render(); },
-  kopieren:function(){
-    var b = aktivesBoard();
-    (navigator.clipboard ? navigator.clipboard.writeText(boardLink(b)) : Promise.reject()).then(function(){ toast('Link kopiert.'); }, function(){ toast('Kopieren ging nicht. Link bitte markieren und kopieren.'); });
-  },
-  plakat:function(){
-    var b = aktivesBoard(), el = document.getElementById('plakat');
-    el.innerHTML = '<p style="font-family:var(--font-chalk);font-size:40px;color:#c2335a;margin:0">Pausenplatz</p><h1 style="font-size:48px">' + esc(b.name) + '</h1>' + qrSvg(boardLink(b), true) +
-      '<p style="font-size:22px">Mit dem Tablet scannen. Oder auf «Unsere Klasse» den Code eintippen:</p><p class="code" style="font-size:36px;letter-spacing:.15em">' + esc(b.code) + '</p>';
-    document.body.classList.add('druck-qr');
-    window.print();
-    setTimeout(function(){ document.body.classList.remove('druck-qr'); }, 500);
-  },
-  neuerCode:function(){
-    var b = aktivesBoard();
-    rpc('board_code_erneuern', { p_board:b.id }).then(function(){ return ladeBoards(); })
-      .then(function(){ render(); toast('Neuer Code. Der alte Link funktioniert nicht mehr.'); }).catch(fehlerToast);
-  },
-  fbArt:function(d){ S.fb.art = d.k; render(); },
-  erledigt:function(d){
-    var m = S.meldungen.filter(function(x){ return x.id === d.id; })[0]; if (!m) return;
-    rest('rueckmeldung?id=eq.' + d.id, { method:'PATCH', body:{ erledigt:!m.erledigt } }).then(ladeMeldungen).then(render).catch(fehlerToast);
-  },
-  vTab:function(d){ S.vTab = d.k; S.pwInfo = null; render(); },
-  einladungWeg:function(d){ rest('einladung?code=eq.' + encodeURIComponent(d.id), { method:'DELETE' }).then(ladeVerwaltung).then(function(){ render(); toast('Einladung zurückgezogen.'); }).catch(fehlerToast); },
-  pwReset:function(d){
-    token().then(function(t){
-      return fetch(SUPA + '/functions/v1/passwort-reset', { method:'POST', headers:{ apikey:KEY, Authorization:'Bearer ' + t, 'Content-Type':'application/json' }, body:JSON.stringify({ pseudonym:d.p }) });
-    }).then(function(r){ return r.json().then(function(j){ if (!r.ok) throw new Error(j.fehler || 'Zurücksetzen fehlgeschlagen'); return j; }); })
-      .then(function(j){ S.pwInfo = { pseudonym:j.pseudonym, pw:j.einmalPasswort }; render(); toast('Einmal-Passwort erzeugt. Gib es der Lehrperson persönlich weiter.'); })
-      .catch(fehlerToast);
-  },
-  rolle:function(d){ rest('profile?id=eq.' + d.id, { method:'PATCH', body:{ rolle:d.r } }).then(ladeVerwaltung).then(function(){ render(); toast('Rolle geändert.'); }).catch(fehlerToast); },
-  appBearbeiten:function(d){ var a = appById(d.id); S.appForm = JSON.parse(JSON.stringify(a)); render(); window.scrollTo(0, 0); },
-  appNeu:function(){ S.appForm = null; render(); }
-};
-
-var F = {
-  anmelden:function(fd){
-    S.fehler = '';
-    return auth('token?grant_type=password', { email:MAIL(fd.get('p')), password:fd.get('pw') })
-      .then(function(j){ setzeSession(j); return starte(); })
-      .catch(function(e){ S.loginTab = 'anmelden'; S.fehler = deutsch(e.message); render(); });
-  },
-  registrieren:function(fd){
-    S.fehler = ''; S.loginTab = 'neu';
-    var p = String(fd.get('p')).trim(), pw = fd.get('pw');
-    return fetch(SUPA + '/functions/v1/registrieren', { method:'POST', headers:{ apikey:KEY, 'Content-Type':'application/json' }, body:JSON.stringify({ code:fd.get('code'), pseudonym:p, passwort:pw }) })
-      .then(function(r){ return r.json().then(function(j){ if (!r.ok) throw new Error(j.fehler || 'Registrieren fehlgeschlagen'); return j; }); })
-      .then(function(){ return auth('token?grant_type=password', { email:MAIL(p), password:pw }); })
-      .then(function(j){ setzeSession(j); return starte(); })
-      .then(function(){ toast('Willkommen im Lehrpersonenzimmer, ' + p + '!'); })
-      .catch(function(e){ S.fehler = deutsch(e.message); render(); });
-  },
-  passwort:function(fd){
-    if (fd.get('a') !== fd.get('b')) { S.fehler = 'Die beiden Passwörter sind nicht gleich.'; render(); return; }
-    S.fehler = '';
-    return auth('user', { password:fd.get('a') }, 'PUT', true)
-      .then(function(){ return rpc('passwort_geaendert'); })
-      .then(function(){ S.ich.muss_passwort_aendern = false; S.view = 'katalog'; return starte(); })
-      .then(function(){ toast('Passwort gespeichert.'); })
-      .catch(function(e){ S.fehler = deutsch(e.message); render(); });
-  },
-  team:function(fd){ var b = aktivesBoard(), p = String(fd.get('p')).trim(); return nachher(rpc('board_mitglied_hinzufuegen', { p_board:b.id, p_pseudonym:p }), p + ' kann dieses Board jetzt mitbearbeiten.'); },
-  umbenennen:function(fd){ var b = aktivesBoard(); return nachher(rest('board?id=eq.' + b.id, { method:'PATCH', body:{ name:String(fd.get('n')).trim() } }), 'Name gespeichert.'); },
-  meldung:function(fd){
-    var fehler = S.fb.art === 'fehler';
-    return rest('rueckmeldung', { method:'POST', body:{ art:S.fb.art, app_id:fehler ? fd.get('app') : null, text:String(fd.get('text')).trim(), von:S.session.uid } })
-      .then(ladeMeldungen).then(function(){ render(); toast('Danke! Deine Rückmeldung ist beim Admin.'); }).catch(fehlerToast);
-  },
-  einladung:function(fd){
-    var code = 'LP-' + zufall(4) + '-' + zufall(2);
-    return rest('einladung', { method:'POST', body:{ code:code, rolle:fd.get('rolle'), erstellt_von:S.session.uid } })
-      .then(ladeVerwaltung).then(function(){ render(); toast('Code ' + code + ' erzeugt. Schick ihn per Mail.'); }).catch(fehlerToast);
-  },
-  app:function(fd, form){
-    var a = S.appForm;
-    var kl = Array.prototype.map.call(form.querySelectorAll('input[name="kl"]:checked'), function(x){ return +x.value; });
-    if (!kl.length) { toast('Bitte mindestens eine Klasse wählen.'); return; }
-    var daten = {
-      titel:String(fd.get('titel')).trim(), uebt:String(fd.get('uebt')).trim() || null, url:String(fd.get('url')).trim(),
-      typ:fd.get('typ'), fach:fd.get('fach'), klassen:kl,
-      lp21:String(fd.get('lp21')).split(',').map(function(s){ return s.trim(); }).filter(Boolean),
-      dauer_min:fd.get('dauer') ? +fd.get('dauer') : null, symbol:String(fd.get('symbol')).trim() || null,
-      lesen_noetig:fd.get('ohneLesen') ? false : (a && a.lesen_noetig === false ? null : (a ? a.lesen_noetig : null)),
-      auf_pausenplatz:!!fd.get('pp'), aktiv:!!fd.get('aktiv'), datenschutz_geprueft:!!fd.get('ds')
-    };
-    var p = a && a.id ? rest('app?id=eq.' + a.id, { method:'PATCH', body:daten })
-      : rest('app', { method:'POST', body:Object.assign({ slug:String(fd.get('slug')).trim(), erstellt_von:S.session.uid }, daten) });
-    return p.then(function(){ S.appForm = null; return ladeApps(); }).then(function(){ render(); toast('Katalog gespeichert.'); }).catch(fehlerToast);
-  }
-};
-
-/* ---------------- Ereignisse ---------------- */
+/* ---------- Ereignisse ---------- */
 document.addEventListener('click', function(e){
-  var el = e.target.closest('[data-act]'); if (!el) return;
-  var fn = A[el.dataset.act]; if (!fn) return;
-  if (el.tagName === 'A') return;
-  if (el.dataset.hinter && e.target !== el) return;
-  e.preventDefault(); fn(el.dataset, { target:e.target, currentTarget:el });
+  var t = e.target.closest('button'); if (!t) { if (e.target.id === 'schleier') dialogZu(); return; }
+  if (t.dataset.fach) { S.fach[t.dataset.fach] = !S.fach[t.dataset.fach]; filterHtml(); liste(); }
+  else if (t.dataset.kl) { S.kl[t.dataset.kl] = !S.kl[t.dataset.kl]; filterHtml(); liste(); }
+  else if (t.id === 'fLesen') { S.ohneLesen = !S.ohneLesen; filterHtml(); liste(); }
+  else if (t.id === 'fReset') { S.fach = {}; S.kl = {}; S.ohneLesen = false; filterHtml(); liste(); }
+  else if (t.dataset.waehle) {
+    var s = t.dataset.waehle, i = S.auswahl.indexOf(s);
+    if (i >= 0) S.auswahl.splice(i, 1); else S.auswahl.push(s);
+    merke(); liste(); leiste();
+  }
+  else if (t.id === 'leeren') { S.auswahl = []; merke(); liste(); leiste(); }
+  else if (t.id === 'qrKnopf') { dialogAuf(); }
+  else if (t.id === 'zu') { dialogZu(); }
+  else if (t.id === 'kopieren') {
+    (navigator.clipboard ? navigator.clipboard.writeText(klassenLink()) : Promise.reject()).then(function(){ toast('Link kopiert.'); }, function(){ toast('Kopieren ging nicht. Link bitte markieren und kopieren.'); });
+  }
+  else if (t.id === 'drucken') {
+    document.getElementById('plakat').innerHTML = '<p style="font-family:var(--font-chalk);font-size:40px;color:#c2335a;margin:0">eduapps.ch</p><h1 style="font-size:46px">Unsere Apps</h1>' +
+      qrSvg(klassenLink()) + '<p style="font-size:22px">Mit dem Tablet scannen.</p><ul style="font-size:20px;text-align:left">' + titelListe() + '</ul>';
+    document.body.classList.add('druck'); window.print(); setTimeout(function(){ document.body.classList.remove('druck'); }, 500);
+  }
 });
-document.addEventListener('submit', function(e){
-  var form = e.target.closest('[data-form]'); if (!form) return;
-  e.preventDefault();
-  var btn = form.querySelector('[type="submit"]'); if (btn) btn.disabled = true;
-  Promise.resolve(F[form.dataset.form](new FormData(form), form)).then(function(){ if (btn && document.body.contains(btn)) btn.disabled = false; });
-});
-document.addEventListener('input', function(e){
-  var k = e.target.dataset && e.target.dataset.input;
-  if (k === 'suche') { S.f.q = e.target.value; katalogListe(); }
-});
-document.addEventListener('change', function(e){
-  var k = e.target.dataset && e.target.dataset.input;
-  if (k === 'ziel') { S.aktiv = e.target.value; katalogListe(); }
-});
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && S.teilen) { S.teilen = false; render(); } });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') dialogZu(); });
 
-/* ---------------- Start ---------------- */
-S.session = ladeSession();
-if (S.session) {
-  starte().catch(function(e){ S.session = null; merkeSession(null); S.view = 'login'; S.fehler = deutsch(e.message); render(); });
-} else { render(); }
+/* ---------- Start ---------- */
+function start(apps){
+  S.apps = apps.slice().sort(function(a, b){ return a.titel.localeCompare(b.titel, 'de'); });
+  S.auswahl = lies().filter(function(s){ return !!appBySlug(s); });
+  filterHtml(); liste(); leiste();
+}
+fetch(SUPA + '/rest/v1/app?select=slug,titel,uebt,url,typ,fach,klassen,lesen_noetig,symbol&aktiv=eq.true', { headers:{ apikey:KEY } })
+  .then(function(r){ if (!r.ok) throw new Error(); return r.json(); })
+  .then(function(r){ start(r && r.length ? r : ERSATZ); })
+  .catch(function(){ start(ERSATZ); });
 })();
 </script>
 </body>
