@@ -72,7 +72,7 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
   </header>
   <div id="inhalt" aria-live="polite"></div>
   <footer class="fuss">
-    <a href="https://benihonegger-source.github.io/LandingpageApps/">Zum ganzen Pausenplatz</a>
+    <a href="./">Alle Apps auf eduapps.ch</a>
     <button class="leise" id="anderesBoard" hidden>Andere Apps laden</button>
   </footer>
 </main>
@@ -83,7 +83,6 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
   var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
   var FARBE = { deutsch:'#ffd23f', mathematik:'#86cdf2', nmg:'#9fdc7c', bewegung_sport:'#ffad66', medien_informatik:'#ffa3bb', ueberfachlich:'#cdbdf2' };
   var MERKEN = 'pausenplatz.board';
-  var APP_BASIS = 'https://benihonegger-source.github.io/LandingpageApps/';
   var inhalt = document.getElementById('inhalt');
   var titel = document.getElementById('titel');
   var unter = document.getElementById('unter');
@@ -97,7 +96,7 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
 
   function feld(a){
     var extern = a.typ === 'extern';
-    return '<a class="feld" style="--farbe:' + (FARBE[a.fach] || '#ffd23f') + '" href="' + esc(extern ? a.url : new URL(a.url, APP_BASIS).href) + '"' +
+    return '<a class="feld" style="--farbe:' + (FARBE[a.fach] || '#ffd23f') + '" href="' + esc(extern ? a.url : new URL(a.url, location.href).href) + '"' +
       (extern ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' +
       '<span class="zeichen" aria-hidden="true">' + esc(a.symbol || a.titel.charAt(0)) + '</span>' +
       '<span class="titel">' + esc(a.titel) + '</span></a>';
@@ -170,12 +169,8 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
   function ausHash(){
     var h = decodeURIComponent(location.hash.slice(1));
     if (/^a=/.test(h)) { var l = slugs(h.slice(2)); if (l.length) { startListe(l); return; } }
-    var c = sauber(h);
-    if (c.length === 10) { start(c); return; }
     var gemerkt = lies();
     if (/^a=/.test(gemerkt)) { var l2 = slugs(gemerkt.slice(2)); if (l2.length) { startListe(l2); return; } }
-    var g = sauber(gemerkt);
-    if (g.length === 10) { start(g); return; }
     zeigeEingabe();
   }
   anderes.addEventListener('click', function(){ merke(''); stop(); code = ''; letzter = ''; history.replaceState(null, '', location.pathname); zeigeEingabe('Neuen QR-Code scannen'); });

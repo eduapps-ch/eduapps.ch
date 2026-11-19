@@ -1,38 +1,33 @@
-# eduapps.ch – Lehrpersonenzimmer
+# eduapps.ch
 
-Plattform für Lehrpersonen: Lern-Apps aus dem Katalog auswählen, auf Klassen-Boards legen
-und per QR-Code auf die Tablets der Kinder bringen.
+Kleine Lern-Apps für die Primarschule: gratis, ohne Anmeldung, ohne Installation und ohne Daten über Kinder.
+
+**Vision:** Bildung gehört allen. Die Apps entstehen mit Vibe-Coding: Lehrpersonen beschreiben, was ihre
+Klasse braucht, und bauen daraus mit KI passgenaue Lern-Apps. Sie werden frei geteilt, öffentlich und gratis.
 
 ## Dateien
 
-- `index.html`: Startseite für Lehrpersonen, ohne Anmeldung: Intro, «So funktioniert's»,
-  App-Übersicht mit Filtern (Fach, Klasse, ohne Lesen) und Auswahl «Für meine Klasse» mit QR-Code
+- `index.html`: Startseite für Lehrpersonen: Vision, «So funktioniert's», App-Übersicht mit Filtern
+  (Fach, Klasse, ohne Lesen) und Auswahl «Für meine Klasse» mit QR-Code
 - `klasse.html#a=slug,slug`: die ausgewählten Apps für die Kinder. Die Auswahl steckt nur im Link;
-  das Tablet merkt sich den Link. (Ältere Board-Codes `klasse.html#CODE` funktionieren weiterhin.)
+  das Tablet merkt sich den Link.
+- `apps/`: die Lern-Apps. Der Knopf «Zurück» führt zu `klasse.html`.
 - `lernstand.html`: Lernstand-Codes der Apps einlesen und als Blätter drucken. Diese Seite darf
   gar keine Verbindung ins Internet aufbauen.
 - `bilder/`: Bilder der Apps für die Startseite
-- `.github/workflows/eduapps-wach-halten.yml`: fragt einmal pro Tag den Katalog ab, damit Supabase
-  das Gratis-Projekt nicht pausiert
+- `.github/workflows/eduapps-wach-halten.yml`: fragt einmal pro Tag den Katalog ab, damit der
+  Katalog-Server (Gratis-Plan) nicht pausiert
 
-## Wo die Apps liegen
+## Datenschutz
 
-Die Apps selbst bleiben auf dem Pausenplatz (Repo `LandingpageApps`):
-`https://benihonegger-source.github.io/LandingpageApps/apps/…`.
-Im Katalog steht bei eigenen Apps nur der Pfad, z. B. `apps/anlaute.html`. Das Lehrpersonenzimmer
-und `klasse.html` setzen die Adresse des Pausenplatzes davor (`APP_BASIS`).
-So bleiben gespeicherte Lernstände auf den Tablets erhalten.
-
-## Server und Datenschutz
-
-- Supabase-Projekt «Lehrerzimmer», Region Zürich (eu-central-2).
-- Gespeichert werden nur Pseudonyme der Lehrpersonen, Boards und der App-Katalog. Keine Daten von Kindern.
-- Keine Anmeldung. Die Seite liest nur den öffentlichen App-Katalog (aktive Apps). Ist der Server nicht
-  erreichbar, zeigt sie eine eingebaute Liste der Pausenplatz-Apps.
-- Neue App in den Katalog: Eintrag in der Supabase-Tabelle `app` (Claude kann das per Chat erledigen).
+- Keine Anmeldung, keine Analyse-Tools, kein Tracking, keine Werbung.
+- Der App-Katalog liegt auf einem Server in Zürich (Supabase, eu-central-2). Er enthält nur
+  Angaben zu den Apps, keine Personendaten. Ist er nicht erreichbar, zeigt die Startseite eine eingebaute Liste.
 - Alle Schriften und der QR-Erzeuger sind eingebettet. Die Sicherheitsregel jeder Seite erlaubt nur
-  Verbindungen zum eigenen Supabase-Server (`lernstand.html`: gar keine).
+  Verbindungen zum Katalog-Server (`lernstand.html` und die Apps: gar keine).
 
-## Domain
+## Neue App
 
-eduapps.ch zeigt über GitHub Pages auf dieses Repo (Settings → Pages → Custom domain).
+1. HTML-Datei in `apps/` legen; der Zurück-Knopf zeigt auf `../klasse.html`.
+2. Ein Bild der Startseite (1024 × 768) als `bilder/<dateiname>.jpg` ablegen.
+3. Eintrag in der Katalog-Tabelle `app` (Titel, Pfad, Fach, Klassen, Symbol).

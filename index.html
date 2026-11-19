@@ -50,6 +50,9 @@ p{margin:0}
 .kopf h1{font-weight:900;font-size:clamp(3.2rem,9vw,5.5rem);line-height:.95;letter-spacing:-.025em}
 .idee{display:flex;flex-direction:column;gap:12px;max-width:64ch;font-size:19px}
 .idee b{font-weight:700}
+.vision{max-width:72ch;background:var(--gelb);border-radius:10px 18px 8px 16px;padding:26px 28px;display:flex;flex-direction:column;gap:12px;transform:rotate(-.4deg);font-size:18px}
+.vision h2{font-weight:900;font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:-.015em}
+.vision b{font-weight:700}
 
 /* So funktioniert's */
 .ablauf{display:flex;flex-direction:column;gap:12px}
@@ -126,6 +129,12 @@ p{margin:0}
       <p>Willst du wissen, wo ein Kind steht, zeigt die App auf Knopfdruck einen <b>Lernstand-Code</b>. Du scannst ihn mit deinem Gerät unter «Lernstand einlesen» und druckst daraus ein Blatt fürs Lernheft.</p>
       <p><b>Der Datenschutz ist eingebaut:</b> Die Apps speichern keine Namen und senden keine Daten über die Kinder ins Internet. Lernstände bleiben auf dem Gerät, bis du sie einliest.</p>
     </div>
+    <aside class="vision" aria-labelledby="visionT">
+      <p class="chalk" style="font-size:28px;line-height:1">Die Vision</p>
+      <h2 id="visionT">Bildung gehört allen.</h2>
+      <p>eduapps.ch entsteht mit <b>Vibe-Coding</b>: Lehrpersonen beschreiben in eigenen Worten, was ihre Klasse braucht, und bauen daraus mit künstlicher Intelligenz kleine, passgenaue Lern-Apps, ohne Programmierkenntnisse. Wer unterrichtet, weiss am besten, was fehlt, und kann es jetzt selbst schaffen.</p>
+      <p>Diese Apps werden <b>frei geteilt</b>: öffentlich, gratis, ohne Werbung, ohne Anmeldung und ohne Daten über Kinder. So hängt gutes Lernmaterial nicht vom Budget einer Schule oder einer Plattform ab, sondern steht jeder Klasse und jedem Kind offen. Das ist Bildung, die demokratisiert ist: von Lehrpersonen für Lehrpersonen, für alle Kinder.</p>
+    </aside>
     <div class="reihe">
       <a class="btn dunkel gross" href="#apps">Zur App-Übersicht
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -182,8 +191,8 @@ p{margin:0}
   <footer class="fusszeile">
     <span>Gratis, ohne Anmeldung, ohne Werbung</span>
     <span>Keine Daten über Kinder, keine Analyse-Tools, kein Tracking</span>
-    <span>App-Katalog auf einem Server in Zürich</span>
-    <a href="https://benihonegger-source.github.io/LandingpageApps/" target="_blank" rel="noopener">Pausenplatz der Kinder</a>
+    <span>Alles auf eduapps.ch, App-Katalog auf einem Server in Zürich</span>
+    <span>Entstanden mit Vibe-Coding, frei geteilt</span>
   </footer>
 </main>
 
@@ -1853,8 +1862,7 @@ var qrcode = function () {
 
 var SUPA = 'https://mfcjwjvdggqvmumamxpk.supabase.co';
 var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
-var APP_BASIS = 'https://benihonegger-source.github.io/LandingpageApps/';
-var BILDER = { 'rechentrainer-1':1, 'anlaute':1, 'einmaleins-heft':1, 'tierbibliothek':1, 'blitzlesen':1, 'lesezug':1 };
+var BILDER = { 'rechentrainer-1':1, 'anlaute':1, 'einmaleins-heft':1, 'tierbibliothek':1, 'blitzlesen':1, 'lesezug':1, 'staerkenkreis':1 };
 var FACH = {
   deutsch:{n:'Deutsch',c:'#ffd23f'}, mathematik:{n:'Mathematik',c:'#86cdf2'}, nmg:{n:'NMG',c:'#9fdc7c'},
   bewegung_sport:{n:'Bewegung & Sport',c:'#ffad66'}, medien_informatik:{n:'Medien & Informatik',c:'#ffa3bb'}, ueberfachlich:{n:'Überfachlich',c:'#cdbdf2'}
@@ -1866,14 +1874,15 @@ var ERSATZ = [
   { slug:'einmaleins-heft', titel:'Einmaleins-Heft', uebt:'Kleines und grosses 1×1, Rechnen bis 10 000', url:'apps/einmaleins-heft.html', typ:'eigen', fach:'mathematik', klassen:[2,3,4], lesen_noetig:null, symbol:'1×1' },
   { slug:'tierbibliothek', titel:'Tierbibliothek', uebt:'Wissen über heimische Wildtiere, mit Videos', url:'apps/tierbibliothek.html', typ:'eigen', fach:'nmg', klassen:[2], lesen_noetig:false, symbol:'Tier' },
   { slug:'blitzlicht', titel:'Blitzlicht', uebt:'Blitzlesen: die 100 häufigsten Wörter schnell erkennen', url:'apps/blitzlesen.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:null, symbol:'Blitz' },
-  { slug:'lesezug', titel:'Lesezug', uebt:'Lesen lernen: hören, Laute, Silben, Wörter, Sätze, Blitzlesen', url:'apps/lesezug.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:false, symbol:'Zug' }
+  { slug:'lesezug', titel:'Lesezug', uebt:'Lesen lernen: hören, Laute, Silben, Wörter, Sätze, Blitzlesen', url:'apps/lesezug.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:false, symbol:'Zug' },
+  { slug:'staerkenkreis', titel:'Stärkenkreis', uebt:'Eigene Stärken entdecken (nach Gardner)', url:'apps/staerkenkreis.html', typ:'eigen', fach:'ueberfachlich', klassen:[1,2,3,4,5,6], lesen_noetig:null, symbol:'Ich' }
 ];
 
 var S = { apps:[], fach:{}, kl:{}, ohneLesen:false, auswahl:[] };
 
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function klText(kl){ kl = (kl || []).slice().sort(); return !kl.length ? '' : kl.length === 1 ? kl[0] + '. Klasse' : kl[0] + '. bis ' + kl[kl.length - 1] + '. Klasse'; }
-function appLink(a){ return a.typ === 'extern' ? a.url : new URL(a.url, APP_BASIS).href; }
+function appLink(a){ return a.typ === 'extern' ? a.url : new URL(a.url, location.href).href; }
 function bildVon(a){ var m = /^apps\/([a-z0-9-]+)\.html$/.exec(a.url || ''); return m && BILDER[m[1]] ? 'bilder/' + m[1] + '.jpg' : null; }
 function appBySlug(s){ for (var i = 0; i < S.apps.length; i++) if (S.apps[i].slug === s) return S.apps[i]; return null; }
 var tt = null;
