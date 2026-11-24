@@ -74,7 +74,7 @@ window.KATALOG = [
   },
   {
     slug:   "rechentrainer",
-    titel:  "Rechentrainer",
+    titel:  "Rechentrainer 1",
     uebt:   "Plus und Minus bis 20 mit dem 20er-Feld",
     url:    "apps/rechentrainer-1.html",
     fach:   "mathematik",
