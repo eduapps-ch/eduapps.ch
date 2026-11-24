@@ -1862,7 +1862,7 @@ var qrcode = function () {
 
 var SUPA = 'https://mfcjwjvdggqvmumamxpk.supabase.co';
 var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
-var BILDER = { 'rechentrainer-1':1, 'anlaute':1, 'einmaleins-heft':1, 'tierbibliothek':1, 'blitzlesen':1, 'lesezug':1, 'staerkenkreis':1 };
+var BILDER = { 'rechentrainer-1':1, 'anlaute':1, 'einmaleins-heft':1, 'tierbibliothek':1, 'blitzlesen':1, 'lesezug':1, 'staerkenkreis':1, 'geld-laden':1 };
 var FACH = {
   deutsch:{n:'Deutsch',c:'#ffd23f'}, mathematik:{n:'Mathematik',c:'#86cdf2'}, nmg:{n:'NMG',c:'#9fdc7c'},
   bewegung_sport:{n:'Bewegung & Sport',c:'#ffad66'}, medien_informatik:{n:'Medien & Informatik',c:'#ffa3bb'}, ueberfachlich:{n:'Überfachlich',c:'#cdbdf2'}
@@ -1875,7 +1875,8 @@ var ERSATZ = [
   { slug:'tierbibliothek', titel:'Tierbibliothek', uebt:'Wissen über heimische Wildtiere, mit Videos', url:'apps/tierbibliothek.html', typ:'eigen', fach:'nmg', klassen:[2], lesen_noetig:false, symbol:'Tier' },
   { slug:'blitzlicht', titel:'Blitzlicht', uebt:'Blitzlesen: die 100 häufigsten Wörter schnell erkennen', url:'apps/blitzlesen.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:null, symbol:'Blitz' },
   { slug:'lesezug', titel:'Lesezug', uebt:'Lesen lernen: hören, Laute, Silben, Wörter, Sätze, Blitzlesen', url:'apps/lesezug.html', typ:'eigen', fach:'deutsch', klassen:[1,2], lesen_noetig:false, symbol:'Zug' },
-  { slug:'staerkenkreis', titel:'Stärkenkreis', uebt:'Eigene Stärken entdecken (nach Gardner)', url:'apps/staerkenkreis.html', typ:'eigen', fach:'ueberfachlich', klassen:[1,2,3,4,5,6], lesen_noetig:null, symbol:'Ich' }
+  { slug:'staerkenkreis', titel:'Stärkenkreis', uebt:'Eigene Stärken entdecken (nach Gardner)', url:'apps/staerkenkreis.html', typ:'eigen', fach:'ueberfachlich', klassen:[1,2,3,4,5,6], lesen_noetig:null, symbol:'Ich' },
+  { slug:'geld-laden', titel:'Geld-Laden', uebt:'Rechnen mit Franken und Rappen, Rückgeld geben', url:'apps/geld-laden.html', typ:'eigen', fach:'mathematik', klassen:[1,2], lesen_noetig:null, symbol:'Fr.' }
 ];
 
 var S = { apps:[], fach:{}, kl:{}, ohneLesen:false, auswahl:[] };
