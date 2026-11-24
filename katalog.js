@@ -84,6 +84,17 @@ window.KATALOG = [
     symbol: "+−"
   },
   {
+    slug:   "rechentrainer-2",
+    titel:  "Rechentrainer 2",
+    uebt:   "Plus und Minus bis 100: zuerst die Zehner, dann die Einer",
+    url:    "apps/rechentrainer-2.html",
+    fach:   "mathematik",
+    klassen: [2],
+    lp21:   ["MA.1.A"],
+    ohneLesen: false,
+    symbol: "100"
+  },
+  {
     slug:   "staerkenkreis",
     titel:  "Stärkenkreis",
     uebt:   "Eigene Stärken entdecken (nach Gardner)",
