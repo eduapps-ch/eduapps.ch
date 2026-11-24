@@ -126,15 +126,8 @@ p{margin:0}
     <h1>eduapps.ch</h1>
     <div class="idee">
       <p>eduapps.ch ist eine Sammlung kleiner Lern-Apps für die Primarschule, die direkt im Browser laufen: <b>gratis, ohne Anmeldung und ohne Installation.</b> Du wählst in der App-Übersicht passende Apps für deine Klasse aus und bringst sie per QR-Code auf die Tablets.</p>
-      <p>Willst du wissen, wo ein Kind steht, zeigt die App auf Knopfdruck einen <b>Lernstand-Code</b>. Du scannst ihn mit deinem Gerät unter «Lernstand einlesen» und druckst daraus ein Blatt fürs Lernheft.</p>
       <p><b>Der Datenschutz ist eingebaut:</b> Die Apps speichern keine Namen und senden keine Daten über die Kinder ins Internet. Lernstände bleiben auf dem Gerät, bis du sie einliest.</p>
     </div>
-    <aside class="vision" aria-labelledby="visionT">
-      <p class="chalk" style="font-size:28px;line-height:1">Die Vision</p>
-      <h2 id="visionT">Bildung gehört allen.</h2>
-      <p>eduapps.ch entsteht mit <b>Vibe-Coding</b>: Lehrpersonen beschreiben in eigenen Worten, was ihre Klasse braucht, und bauen daraus mit künstlicher Intelligenz kleine, passgenaue Lern-Apps, ohne Programmierkenntnisse. Wer unterrichtet, weiss am besten, was fehlt, und kann es jetzt selbst schaffen.</p>
-      <p>Diese Apps werden <b>frei geteilt</b>: öffentlich, gratis, ohne Werbung, ohne Anmeldung und ohne Daten über Kinder. So hängt gutes Lernmaterial nicht vom Budget einer Schule oder einer Plattform ab, sondern steht jeder Klasse und jedem Kind offen. Das ist Bildung, die demokratisiert ist: von Lehrpersonen für Lehrpersonen, für alle Kinder.</p>
-    </aside>
     <div class="reihe">
       <a class="btn dunkel gross" href="#apps">Zur App-Übersicht
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -143,6 +136,27 @@ p{margin:0}
         Lernstand einlesen</a>
     </div>
   </header>
+
+  <section class="uebersicht" id="apps" aria-labelledby="appsT">
+    <h2 id="appsT">App-Übersicht</h2>
+    <div class="filter" aria-label="Filter">
+      <div><span class="lbl">Fachbereich</span><div class="reihe" id="fFach"></div></div>
+      <div><span class="lbl">Klasse</span><div class="reihe" id="fKlasse"></div></div>
+      <div class="reihe">
+        <button class="chip" id="fLesen" aria-pressed="false" style="border-radius:12px">Ohne Lesen spielbar</button>
+        <button class="btn" id="fReset" style="border:none;background:none;text-decoration:underline;color:var(--rosa-tief)">Filter zurücksetzen</button>
+      </div>
+    </div>
+    <p class="treffer" id="treffer" aria-live="polite"></p>
+    <div class="apps" id="liste"></div>
+  </section>
+
+  <aside class="vision" aria-labelledby="visionT">
+    <p class="chalk" style="font-size:28px;line-height:1">Die Vision</p>
+    <h2 id="visionT">Bildung gehört allen.</h2>
+    <p>eduapps.ch entsteht mit <b>Vibe-Coding</b>: Lehrpersonen beschreiben in eigenen Worten, was ihre Klasse braucht, und bauen daraus mit künstlicher Intelligenz kleine, passgenaue Lern-Apps, ohne Programmierkenntnisse. Wer unterrichtet, weiss am besten, was fehlt, und kann es jetzt selbst schaffen.</p>
+    <p>Diese Apps werden <b>frei geteilt</b>: öffentlich, gratis, ohne Werbung, ohne Anmeldung und ohne Daten über Kinder. So hängt gutes Lernmaterial nicht vom Budget einer Schule oder einer Plattform ab, sondern steht jeder Klasse und jedem Kind offen. Das ist Bildung, die demokratisiert ist: von Lehrpersonen für Lehrpersonen, für alle Kinder.</p>
+  </aside>
 
   <section class="ablauf" aria-labelledby="ablaufT">
     <h2 id="ablaufT">So funktioniert's</h2>
@@ -172,20 +186,6 @@ p{margin:0}
         <p class="fuss"><a class="btn dunkel" href="lernstand.html">Lernstand einlesen</a></p>
       </div>
     </div>
-  </section>
-
-  <section class="uebersicht" id="apps" aria-labelledby="appsT">
-    <h2 id="appsT">App-Übersicht</h2>
-    <div class="filter" aria-label="Filter">
-      <div><span class="lbl">Fachbereich</span><div class="reihe" id="fFach"></div></div>
-      <div><span class="lbl">Klasse</span><div class="reihe" id="fKlasse"></div></div>
-      <div class="reihe">
-        <button class="chip" id="fLesen" aria-pressed="false" style="border-radius:12px">Ohne Lesen spielbar</button>
-        <button class="btn" id="fReset" style="border:none;background:none;text-decoration:underline;color:var(--rosa-tief)">Filter zurücksetzen</button>
-      </div>
-    </div>
-    <p class="treffer" id="treffer" aria-live="polite"></p>
-    <div class="apps" id="liste"></div>
   </section>
 
   <footer class="fusszeile">
