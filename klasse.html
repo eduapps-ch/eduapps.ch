@@ -2,10 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<!-- Datenschutz: Diese Seite fragt nur beim Lehrpersonenzimmer-Server (Supabase, Zürich) nach,
-     welche Apps zum Board-Code gehören. Sie sendet keine Daten über das Kind und speichert
-     auf dem Gerät nur den Board-Code. Schriften sind eingebettet. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src https://mfcjwjvdggqvmumamxpk.supabase.co; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<!-- Datenschutz: Kein Server, keine Datenbank. Die Seite liest die Apps aus katalog.js im selben Repo
+     und baut keine Verbindungen auf. Auf dem Gerät wird nur die Auswahl aus dem QR-Link gemerkt. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -76,11 +75,10 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
     <button class="leise" id="anderesBoard" hidden>Andere Apps laden</button>
   </footer>
 </main>
+<script src="katalog.js"></script>
 <script>
 (function(){
   'use strict';
-  var SUPA = 'https://mfcjwjvdggqvmumamxpk.supabase.co';
-  var KEY = 'sb_publishable_e9CLiMC8cUg5JzDo5ZdXog_WGIGBdKN';
   var FARBE = { deutsch:'#ffd23f', mathematik:'#86cdf2', nmg:'#9fdc7c', bewegung_sport:'#ffad66', medien_informatik:'#ffa3bb', ueberfachlich:'#cdbdf2' };
   var MERKEN = 'pausenplatz.board';
   try { sessionStorage.setItem('eduapps.woher', 'klasse'); } catch(e){}
@@ -111,21 +109,16 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
       '<p>Deine Lehrperson zeigt dir einen QR-Code. Öffne die Kamera des Tablets und halte sie auf den Code.</p></div>';
   }
 
+  function ausKatalog(){ return (window.KATALOG || []).filter(function(a){ return a && a.slug && a.titel && a.url && a.aktiv !== false; }).map(function(a){ return { slug:a.slug, titel:a.titel, uebt:a.uebt || '', url:a.url, typ:a.extern ? 'extern' : 'eigen', fach:a.fach, klassen:a.klassen || [], lesen_noetig:a.ohneLesen ? false : null, symbol:a.symbol }; }); }
   function slugs(s){
     return String(s || '').split(',').map(function(x){ return x.trim().toLowerCase(); })
       .filter(function(x){ return /^[a-z0-9-]{2,60}$/.test(x); }).slice(0, 30);
   }
   function startListe(l){
     stop(); code = ''; letzter = '';
-    var q = 'select=slug,titel,url,typ,fach,symbol&aktiv=eq.true&slug=in.(' + l.join(',') + ')';
-    fetch(SUPA + '/rest/v1/app?' + q, { headers:{ apikey:KEY } })
-      .then(function(r){ if (!r.ok) throw new Error('netz'); return r.json(); })
-      .then(function(rows){
-        var m = {}; (rows || []).forEach(function(r){ m[r.slug] = r; });
-        merke('a=' + l.join(','));
-        zeige({ name:'Unsere Apps', fokus:null, apps:l.map(function(s){ return m[s]; }).filter(Boolean) });
-      })
-      .catch(function(){ inhalt.innerHTML = '<div class="karte"><h2>Keine Verbindung</h2><p>Prüfe das WLAN und lade die Seite neu.</p></div>'; });
+    var m = {}; ausKatalog().forEach(function(r){ m[r.slug] = r; });
+    merke('a=' + l.join(','));
+    zeige({ name:'Unsere Apps', fokus:null, apps:l.map(function(s){ return m[s]; }).filter(Boolean) });
   }
 
   function zeige(board){
@@ -145,28 +138,8 @@ h1{margin:6px 0 0;font-family:var(--font-display);font-weight:900;font-size:clam
     }
   }
 
-  function laden(){
-    if (!code) return;
-    fetch(SUPA + '/rest/v1/rpc/board_fuer_kinder', {
-      method: 'POST',
-      headers: { apikey: KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ p_code: code })
-    }).then(function(r){ if (!r.ok) throw new Error('netz'); return r.json(); })
-      .then(function(board){
-        if (!board) { merke(''); code = ''; letzter = ''; stop(); zeigeEingabe('Diesen Code gibt es nicht mehr'); return; }
-        merke(code);
-        var neu = JSON.stringify(board);
-        if (neu !== letzter) { letzter = neu; zeige(board); }
-      })
-      .catch(function(){
-        if (!letzter) { inhalt.innerHTML = '<div class="karte"><h2>Keine Verbindung</h2><p>Prüfe das WLAN. Die Seite versucht es gleich wieder.</p></div>'; }
-      });
-  }
+  function laden(){}
   function stop(){ if (timer) { clearInterval(timer); timer = null; } }
-  function start(c){
-    code = c; letzter = ''; stop(); laden();
-    timer = setInterval(function(){ if (!document.hidden) laden(); }, 20000);
-  }
   function ausHash(){
     var h = decodeURIComponent(location.hash.slice(1));
     if (/^a=/.test(h)) { var l = slugs(h.slice(2)); if (l.length) { startListe(l); return; } }

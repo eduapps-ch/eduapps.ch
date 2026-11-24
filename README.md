@@ -16,19 +16,17 @@ Klasse braucht, und bauen daraus mit KI passgenaue Lern-Apps. Sie werden frei ge
 - `lernstand.html`: Lernstand-Codes der Apps einlesen und als Blätter drucken. Diese Seite darf
   gar keine Verbindung ins Internet aufbauen.
 - `bilder/`: Bilder der Apps für die Startseite
-- `.github/workflows/eduapps-wach-halten.yml`: fragt einmal pro Tag den Katalog ab, damit der
-  Katalog-Server (Gratis-Plan) nicht pausiert
 
 ## Datenschutz
 
+- Kein Server, keine Datenbank: alles liegt in diesem Repo und läuft über GitHub Pages.
 - Keine Anmeldung, keine Analyse-Tools, kein Tracking, keine Werbung.
-- Der App-Katalog liegt auf einem Server in Zürich (Supabase, eu-central-2). Er enthält nur
-  Angaben zu den Apps, keine Personendaten. Ist er nicht erreichbar, zeigt die Startseite eine eingebaute Liste.
-- Alle Schriften und der QR-Erzeuger sind eingebettet. Die Sicherheitsregel jeder Seite erlaubt nur
-  Verbindungen zum Katalog-Server (`lernstand.html` und die Apps: gar keine).
+- Der App-Katalog ist die Datei `katalog.js`. Startseite und Klassenseite lesen nur diese Datei.
+- Alle Schriften und der QR-Erzeuger sind eingebettet. Die Sicherheitsregel jeder Seite verbietet
+  Verbindungen nach aussen (`connect-src 'none'`).
 
 ## Neue App
 
 1. HTML-Datei in `apps/` legen; der Zurück-Knopf zeigt auf `../zurueck.html` (führt Lehrpersonen zur Übersicht, Kinder zur Klassenseite).
 2. Ein Bild der Startseite (1024 × 768) als `bilder/<dateiname>.jpg` ablegen.
-3. Eintrag in der Katalog-Tabelle `app` (Titel, Pfad, Fach, Klassen, Symbol).
+3. In `katalog.js` einen Eintrag kopieren und anpassen.
