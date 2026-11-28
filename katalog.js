@@ -95,6 +95,17 @@ window.KATALOG = [
     symbol: "100"
   },
   {
+    slug:   "spielebox",
+    titel:  "Spielebox",
+    uebt:   "Knobeln: Klötze drehen, spiegeln und eine Kiste lückenlos füllen",
+    url:    "apps/spielebox.html",
+    fach:   "mathematik",
+    klassen: [1, 2, 3, 4],
+    lp21:   ["MA.2.A"],
+    ohneLesen: true,
+    symbol: "Box"
+  },
+  {
     slug:   "staerkenkreis",
     titel:  "Stärkenkreis",
     uebt:   "Eigene Stärken entdecken (nach Gardner)",
