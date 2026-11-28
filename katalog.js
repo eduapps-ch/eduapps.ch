@@ -32,6 +32,17 @@ window.KATALOG = [
     symbol: "A·a"
   },
   {
+    slug:   "bildersudoku",
+    titel:  "Bildersudoku",
+    uebt:   "Logisch denken: Tiere so einziehen lassen, dass jedes pro Reihe, Spalte und Haus einmal wohnt (4×4, 6×6, 8×8)",
+    url:    "apps/bildersudoku.html",
+    fach:   "mathematik",
+    klassen: [1, 2, 3, 4],
+    lp21:   ["MA.2.B"],
+    ohneLesen: true,
+    symbol: "4×4"
+  },
+  {
     slug:   "blitzlicht",
     titel:  "Blitzlicht",
     uebt:   "Blitzlesen: die 100 häufigsten Wörter schnell erkennen",
