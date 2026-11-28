@@ -8,6 +8,9 @@
   1. Die HTML-Datei in den Ordner «apps» legen (Zurück-Knopf: href="../zurueck.html").
   2. Ein Bild der Startseite (1024 × 768) als «bilder/<dateiname>.jpg» ablegen (freiwillig).
   3. Hier einen Eintrag kopieren, anpassen, Komma nicht vergessen.
+  4. Mit Bild: den Dateinamen in index.html bei «var BILDER» ergänzen.
+  5. In index.html und klasse.html bei «katalog.js?v=…» das Datum erhöhen,
+     sonst zeigen Browser bis zu 10 Minuten lang noch die alte Liste.
 
   fach:      deutsch, mathematik, nmg, bewegung_sport, medien_informatik, ueberfachlich
   klassen:   Klassenstufen 1 bis 6, z. B. [1, 2]
